@@ -1,3 +1,15 @@
+2022-10-21	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 0.2:
+	  Added a simple form validation. Added CSS. Other small improvements.
+	* ChoiceController.java, Chooser.java, IndexController.java,
+	  index.html, choose.html: Enabled form validation and displaying
+	  validation errors.
+	* choose.html: Added a link to return to the main page. Other small
+	  improvements.
+	* src/main/resources/static/rsrc/meqaris.css, index.html, choose.html:
+	  Added a CSS stylesheet.
+
 2022-10-14	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
 
 	* Meqaris-UI-web-java version 0.1:
