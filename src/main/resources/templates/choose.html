@@ -43,6 +43,9 @@ Choose what to display:
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_RESERVATIONS)).build()}"
 		hreflang="en">Resource reservations</a></li>
 </ul>
+<p>
+<a th:href="${(#mvc.url('IC#indexPage')).build()}" hreflang="en">Back to file selection</a>
+</p>
 <div th:unless="${#lists.isEmpty(__${chooser.ATTR_CONFIG}__)}">
 	<table>
 		<caption>Configuration</caption>
