@@ -1,0 +1,262 @@
+/*
+ * Meqaris - the CSS style sheet.
+ *
+ * Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+ *
+ * This file is part of Meqaris (Meeting Equipment and Room Invitation System),
+ *  software that allows booking meeting rooms and other resources using
+ *  e-mail invitations.
+ * Meqaris homepage: https://meqaris.sourceforge.io/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* A winter-blue theme */
+
+/* CSS 1 (most) */
+
+body		{
+			/*font-family: sans-serif, serif, arial;*/
+			background-color: #87CEEB;
+			color: black;
+			text-align: justify;
+		}
+
+a:link		{
+			background-color: #87CEEB;
+			color: blue;
+			font-weight: bold;
+			text-decoration: underline;
+			text-transform: none;
+		}
+
+a:visited	{
+			background-color: #87CEEB;
+			color: #006000;
+			font-weight: bold;
+			text-decoration: underline;
+			text-transform: none;
+		}
+
+A:active	{
+			background-color: inherit;
+			color: yellow;
+		}
+
+a:focus		{
+			border-style: none;
+			outline-width: 0px;
+		}
+
+pre		{
+/* 			font-family: monospace, "courier new", courier; */
+			background-color: #D0FFFF;
+			color: black;
+		}
+
+code, kbd, samp, var
+		{
+/* 			font-family: monospace, "courier new", courier; */
+			background-color: #A0EEEE;
+			color: black;
+		}
+
+
+img		{
+			border-style: none;
+			vertical-align: middle;
+		}
+
+img:focus	{
+			border-style: none;
+			outline-width: 0px;
+		}
+
+/* Frames around selected pictures */
+img.frame	{
+			border-color: blue;
+			border-style: solid;
+			vertical-align: middle;
+		}
+
+/* Graphical signification of acronyms and abbreviations */
+acronym, abbr	{
+			border-bottom: 1px dotted black;
+			cursor:	help; 		/* CSS 2 */
+		}
+
+/* Important information */
+.important	{
+			/*text-transform: uppercase;*/
+			font-style: normal;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+
+.b		{	font-weight: bold;		}
+
+.u		{	text-decoration: underline;	}
+
+.c		{	text-align: center;		}
+
+.r		{	text-align: right;		}
+
+.l		{	text-align: left;		}
+
+ul, ol, li	{	list-style-position: outside;	}
+
+ul		{	list-style-type: disc;		}
+ul ul		{	list-style-type: square;	}
+ul ul ul	{	list-style-type: circle;	}
+
+ol		{	list-style-type: decimal;	}
+
+ol.rom		{	list-style-type: upper-roman;	}
+
+ol.alfa		{	list-style-type: lower-alpha;	}
+
+/* Chapter header */
+.hdr		{
+			font-size: 200%;
+			font-weight: normal;
+			text-align: center;
+		}
+
+table		{
+			border-color: gray gray gray gray;
+			border-style: solid;
+			border-width: 1px;
+ 			width: 100%;
+		}
+
+caption		{
+			font-size: 150%;
+			font-weight: bold;
+			text-align: center;
+		}
+
+th		{
+			border-color: gray gray gray gray;
+			border-style: solid;
+			border-width: 1px;
+			text-align: center;
+		}
+
+td		{
+			border-color: gray gray gray gray;
+			border-style: solid;
+			border-width: 1px;
+		}
+
+td hr		{	display: none;			}
+
+.error		{
+			background: #FFD0D0;
+			border: 5px solid;
+			border-color: #FF0000;
+			margin-bottom: 20px;
+			margin-top: 20px;
+			padding: 5px;
+			text-align: center;
+		}
+
+.red_frame	{
+			border: 5px solid;
+			border-color: #FF0000;
+		}
+
+/* =============================================================== */
+/* CSS 2 */
+@media print {
+
+/* Print only in black & white, just in case */
+  body		{
+			background-color: white;
+			color: black;
+			text-align: justify;
+		}
+
+  a:link, a:visited, a:active
+		{
+			background-color: white;
+			color: black;
+			font-weight: bold;
+			text-decoration: underline;
+			text-transform: none;
+		}
+
+  pre		{
+  			background-color: white;
+  			border: solid 1px black;
+			color: black;
+  		}
+
+  code, kbd	{
+/* 			font-family: monospace, "courier new", courier; */
+			background-color: white;
+			color: black;
+		}
+
+
+  acronym, abbr	{	border-bottom: none;		}
+
+  .hdr		{	page-break-after: avoid;	}
+
+  tr		{	page-break-inside: avoid;	}
+
+  td		{	page-break-inside: avoid;	}
+  hr		{	display: none;			}
+  img		{	display: none;			}
+
+  td.numpad	{
+			background-color: white;
+			color: black;
+		}
+
+}
+
+@media aural {
+
+  body		{
+  			pitch: medium;
+			pitch-range: 50;
+  			richness: 50;
+  			speak: normal;
+  			speak-punctuation: none;
+  			speak-numeral: continuous;
+  			speech-rate: medium;
+  			volume: soft;
+  		}
+
+  acronym	{	speak: spell-out;		}
+
+  table, td	{	speak-header: always;		}
+
+  .important	{
+  			pitch: medium;
+  			richness: 90;
+  			stress: 90;
+  			volume: medium;
+		}
+
+  .hdr		{	volume: loud;			}
+
+  hr		{
+  			display: none;
+  			speak: none;
+  		}
+
+  pre,code,kbd	{	speak-punctuation: code;	}
+
+}
