@@ -22,6 +22,9 @@
 
 package bogdrosoft.meqaris.ui.web.spring.controller;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * The "chooser" bean for web pages.
  * @author Bogdan Drozdowski
@@ -58,6 +61,8 @@ public class Chooser {
 	 */
 	public static final String ATTR_RES_RESERV = "meq_resources_reserv";
 
+	@NotNull
+	@Size(min = 1)
 	private String fileName;
 
 	/**

@@ -25,6 +25,7 @@ package bogdrosoft.meqaris.ui.web.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  * The Spring controller for the root/index page.
@@ -49,11 +50,12 @@ public class IndexController {
 	 * @return The name of the view to forward to.
 	 */
 	@GetMapping("/")
-	public String indexPage(Model model) {
+	public String indexPage(
+			@ModelAttribute(name = MODEL_ATTR_CHOOSER) Chooser chooser,
+			Model model
+		) {
 
-		Chooser c = new Chooser();
-		c.setFileName("/etc/meqaris.ini");
-		model.addAttribute(MODEL_ATTR_CHOOSER, c);
+		chooser.setFileName("/etc/meqaris.ini");
 		return INDEX_VIEW_NAME;
 	}
 }

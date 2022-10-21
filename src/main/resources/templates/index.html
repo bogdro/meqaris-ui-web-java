@@ -36,6 +36,7 @@
 	<form method="post" action="#" th:action="${(#mvc.url('CC#choicePagePost')).build()}" th:object="${chooser}">
 		<label th:for="fileName" lang="en">Meqaris configuration file on the server to analyze:</label>
 		<input th:field="*{fileName}" size="50" />
+		<span class="error" th:if="${#fields.hasErrors('fileName')}" th:errors="*{fileName}">Filename error</span>
 		<br />
 		<input type="submit" value="Open" />
 		<input type="reset" value="Reset" />

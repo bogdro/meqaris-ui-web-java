@@ -27,11 +27,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.ini4j.Ini;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +70,7 @@ public class ChoiceController {
 			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) Chooser c,
 			Model model
 		) {
+
 		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		if (Chooser.FORM_PARAM_NAME_CONFIG.equals(cfgName)) {
 
@@ -98,9 +102,15 @@ public class ChoiceController {
 	 */
 	@PostMapping("/" + CHOICE_VIEW_NAME)
 	public String choicePagePost(
-			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) Chooser c,
+			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) @Valid Chooser c,
+			BindingResult res,	// NOTE: this MUST be the second parameter in the method!
 			Model model
 		) throws IOException {
+
+		if (res.hasErrors()) {
+
+			return IndexController.INDEX_VIEW_NAME;
+		}
 
 		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		String name = c.getFileName();
