@@ -1,0 +1,6 @@
+2022-10-14	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 0.1:
+	  Initial version: asking the user to specify the Meqaris
+	  configuration file, displaying the configuration, resources and
+	  resource reservations. Packaging + standard files included.

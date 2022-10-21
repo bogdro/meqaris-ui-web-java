@@ -1,0 +1,57 @@
+	Meqaris (Meeting Equipment and Room Invitation System)
+			Web User Interface
+		    Installation instructions
+-----------------------------------------------------------------------
+
+-----------------
+Project home page
+-----------------
+
+https://meqaris.sourceforge.io/
+
+--------------------------------------------------
+Rebuilding and running the application stand-alone
+--------------------------------------------------
+
+- Install a Java Runtime Environment (JRE)
+
+- Install Apache Maven (https://maven.apache.org/)
+
+- In the project directory (where pom.xml is located) run
+
+	mvn spring-boot:run
+
+- Open a web browser and point it to the host and port that was displayed
+  on the terminal
+
+-----------------------------------
+Running the application stand-alone
+-----------------------------------
+
+- Install a Java Runtime Environment
+
+- Install Apache Maven
+
+- In the project directory (where pom.xml is located) run
+
+	mvn package
+
+- Run
+	java -jar target/meqaris-ui-web-java-X.Y.Z.jar
+
+- Open a web browser and point it to the host and port that was displayed
+  on the terminal
+
+------------------------
+Application installation
+------------------------
+
+- Install a Java Runtime Environment
+
+- Install Apache Maven
+
+- In the project directory (where pom.xml is located) run
+
+	mvn package
+
+- Copy the target/meqaris-ui-web-java-X.Y.Z.jar file to any suitable location.

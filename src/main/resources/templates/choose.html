@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<!-- 
+# Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+#
+# This file is part of Meqaris (Meeting Equipment and Room Invitation System),
+#  software that allows booking meeting rooms and other resources using
+#  e-mail invitations.
+# Meqaris homepage: https://meqaris.sourceforge.io/
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
+#
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+
+<title>Choose what to display - Meqaris Web UI</title>
+
+<meta name="Author" content="Bogdan Drozdowski" />
+<meta name="Language" content="en" />
+</head>
+<body>
+Choose what to display:
+<ul>
+	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_CONFIG)).build()}"
+		hreflang="en">Configuration</a></li>
+	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_RESOURCES)).build()}"
+		hreflang="en">Resources</a></li>
+	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_RESERVATIONS)).build()}"
+		hreflang="en">Resource reservations</a></li>
+</ul>
+<div th:unless="${#lists.isEmpty(__${chooser.ATTR_CONFIG}__)}">
+	<table>
+		<caption>Configuration</caption>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Value</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="c : ${__${chooser.ATTR_CONFIG}__}">
+				<td th:text="${c.c_name}"></td>
+				<td th:text="${c.c_value}"></td>
+				<td th:text="${c.c_description}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div th:unless="${#lists.isEmpty(__${chooser.ATTR_RES}__)}">
+	<table>
+		<caption>Bookable resources</caption>
+		<thead>
+			<tr>
+				<th>Resource ID</th>
+				<th>Name</th>
+				<th>E-mail</th>
+				<th>Description</th>
+				<th>Enabled</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="r : ${__${chooser.ATTR_RES}__}">
+				<td th:text="${r.r_id}"></td>
+				<td th:text="${r.r_name}"></td>
+				<td th:text="${r.r_email}"></td>
+				<td th:text="${r.r_description}"></td>
+				<td th:text="${r.r_enabled}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div th:unless="${#lists.isEmpty(__${chooser.ATTR_RES_RESERV}__)}">
+	<table>
+		<caption>Resource reservations</caption>
+		<thead>
+			<tr>
+				<th>Resource ID</th>
+				<th>Time interval</th>
+				<th>Organizer</th>
+				<th>Summary</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="rr : ${__${chooser.ATTR_RES_RESERV}__}">
+				<td th:text="${rr.rr_r_id}"></td>
+				<td th:text="${rr.rr_interval}"></td>
+				<td th:text="${rr.rr_organiser}"></td>
+				<td th:text="${rr.rr_summary}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

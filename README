@@ -1,0 +1,21 @@
+This is the README file for Meqaris Web User Interface.
+
+Meqaris (Meeting Equipment and Room Invitation System) is a system that
+ allows booking meeting rooms and other resources (like mobile whiteboards,
+ projectors or conference sets) using the same e-mail invitations that
+ are used to invite participants to meetings.
+
+Meqaris Web User Interface allows to:
+- view Meqaris configuration,
+- view meeting resources, like rooms or equipment,
+- view all resource reservations (current and past).
+
+Requirements:
+
+- A Java Runtime Environment (JRE)
+
+Author: Bogdan Drozdowski, bogdro (at) users . sourceforge . net
+
+License: GNU AGPL version 3 or newer.
+
+Meqaris homepage: https://meqaris.sourceforge.io/
