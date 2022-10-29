@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
 <!-- 
 # Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
 #
@@ -27,14 +27,16 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link rel="stylesheet" type="text/css"
 	href="../static/rsrc/meqaris.css" th:href="@{/rsrc/meqaris.css}" />
+<link rel="icon" type="image/svg+xml"
+	href="../static/rsrc/meqaris-icon.svg" th:href="@{/rsrc/meqaris-icon.svg}">
 
-<title>Select configuration file - Meqaris Web UI</title>
+<title>Select a configuration file - Meqaris Web UI</title>
 
 <meta name="Author" content="Bogdan Drozdowski" />
 <meta name="Language" content="en" />
 </head>
 <body>
-	<h1 class="c">Select Meqaris configuration file</h1>
+	<h1 class="c">Select a Meqaris configuration file</h1>
 
 	<form method="post" action="#" th:action="${(#mvc.url('CC#choicePagePost')).build()}" th:object="${chooser}">
 		<label th:for="fileName" lang="en">Meqaris configuration file on the server to analyze:</label>
