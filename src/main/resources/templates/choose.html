@@ -109,7 +109,12 @@ Choose what to display:
 			<tr th:each="rr : ${__${chooser.ATTR_RES_RESERV}__}">
 				<td th:text="${rr.rr_r_id}"></td>
 				<td th:text="${rr.rr_interval}"></td>
-				<td th:text="${rr.rr_organiser}"></td>
+				<td>
+					<a href="mailto:" th:if="${rr.rr_organiser.startsWith('mailto:')}"
+						th:text="${rr.rr_organiser}" th:href="${rr.rr_organiser}"></a>
+					<a href="mailto:" th:if="${not rr.rr_organiser.startsWith('mailto:')}"
+						th:text="${rr.rr_organiser}" th:href="'mailto:' + ${rr.rr_organiser}"></a>
+				</td>
 				<td th:text="${rr.rr_summary}"></td>
 			</tr>
 		</tbody>
