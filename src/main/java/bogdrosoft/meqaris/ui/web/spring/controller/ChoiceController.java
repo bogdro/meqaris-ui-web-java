@@ -107,24 +107,39 @@ public class ChoiceController {
 			Model model
 		) throws IOException {
 
+		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		if (res.hasErrors()) {
 
+			// don't redirect or the error is lost
 			return IndexController.INDEX_VIEW_NAME;
 		}
 
-		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		String name = c.getFileName();
 		if (name == null) {
+
+			res.rejectValue("fileName", "fileName.empty", "File not provided.");
+			// don't redirect or the error is lost
 			return IndexController.INDEX_VIEW_NAME;
 		}
 
 		File cfgFile = new File(name);
 		if (! cfgFile.exists() || ! cfgFile.canRead()) {
+
+			res.rejectValue("fileName", "fileName.error", "File doesn't exist or cannot be read.");
+			// don't redirect or the error is lost
 			return IndexController.INDEX_VIEW_NAME;
 		}
 
 		Ini ini = new Ini(cfgFile);
-		Ini.Section dbSection = ini.get(ini.get("meqaris").get("dbtype"));
+		String dbType = ini.get("meqaris").get("dbtype");
+		if (! "postgresql".equalsIgnoreCase(dbType)) {
+
+			res.rejectValue("fileName", "fileName.error", "The database in the provided file is not PostgreSQL.");
+			// don't redirect or the error is lost
+			return IndexController.INDEX_VIEW_NAME;
+		}
+
+		Ini.Section dbSection = ini.get(dbType);
 
 		PGSimpleDataSource ds = new PGSimpleDataSource();
 		ds.setUser(dbSection.get("username"));
