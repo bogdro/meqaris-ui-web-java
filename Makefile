@@ -22,7 +22,7 @@
 #
 
 NAME = meqaris-ui-web-java
-VER = 0.2
+VER = 0.3
 
 RMDIR = /bin/rm -fr
 # when using '-p', no error is generated when the directory exists
