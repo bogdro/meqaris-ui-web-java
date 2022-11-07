@@ -87,7 +87,8 @@ public class ChoiceController {
 		} else if (Chooser.FORM_PARAM_NAME_RESERVATIONS.equals(cfgName)) {
 
 			List<Map<String, Object>> res = jdbc.queryForList(
-					"select rr_r_id, rr_interval, rr_organiser, rr_summary from meq_resource_reservations order by rr_id desc");
+					"select rr_r_id, rr_interval, rr_organiser, rr_summary from meq_resource_reservations"
+					+ " order by lower(rr_interval) desc, rr_id desc");
 			model.addAttribute(Chooser.ATTR_RES_RESERV, res);
 		}
 		return CHOICE_VIEW_NAME;
