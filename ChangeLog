@@ -1,3 +1,29 @@
+2022-11-07	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 0.4:
+	  Added simple error handling. Improvements in the build system.
+	  Other small improvements.
+	* MeqErrorController.java, templates/error.html: Added a controller
+	  and a web template for error handling.
+	* ChoiceController.java (choicePageGet): The reservations are now
+	  sorted by the beginning timestamp (descending) and then by ID.
+	* Makefile: Use just one command for packaging. Add "-src" to package
+	  filename. Bump version.
+
+2022-10-30	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 0.3:
+	  Added the Meqaris icon. Added "mailto:" to organizer. More validation
+	  of the input file. Other small improvements.
+	* ChoiceController.java: Added more validation of the input file
+	  (checking in the database type is PostgreSQL, for example) and new
+	  error messages to display on the index page.
+	* choose.html: Make organizer a link and add "mailto:" to the e-mail,
+	  if not present.
+	* src/main/resources/static/rsrc/meqaris-icon.svg, index.html,
+	  choose.html: Added the Meqaris icon.
+	* index.html, choose.html: Removed #-comments from HTML.
+
 2022-10-21	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
 
 	* Meqaris-UI-web-java version 0.2:
