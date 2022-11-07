@@ -22,7 +22,7 @@
 #
 
 NAME = meqaris-ui-web-java
-VER = 0.3
+VER = 0.4
 
 RMDIR = /bin/rm -fr
 # when using '-p', no error is generated when the directory exists
@@ -34,11 +34,11 @@ CHMOD = /bin/chmod
 # ifneq ($(shell tar --version | grep -i bsd),)
 # PACK1_GNUOPTS = --format gnutar
 # endif
-PACK1 = /bin/tar $(PACK1_GNUOPTS) -vcf
-PACK1_EXT = .tar
+PACK = /bin/tar $(PACK1_GNUOPTS) -vzcf
+PACK_EXT = tar.gz
 
-PACK2 = /usr/bin/gzip -9
-PACK2_EXT = .gz
+#PACK2 = /usr/bin/gzip -9
+#PACK2_EXT = .gz
 
 MAVEN = mvn
 
@@ -47,17 +47,18 @@ SUBDIRS = src
 EXTRA_DIST = AUTHORS ChangeLog COPYING INSTALL-*.txt \
 	Makefile NEWS pom.xml README
 
+FILE_ARCH_SRC = $(NAME)-$(VER)-src.$(PACK_EXT)
+
 all:	package
 
-dist:	$(NAME)-$(VER)$(PACK1_EXT)$(PACK2_EXT)
+dist:	$(FILE_ARCH_SRC)
 
-$(NAME)-$(VER)$(PACK1_EXT)$(PACK2_EXT): $(EXTRA_DIST) \
+$(FILE_ARCH_SRC): $(EXTRA_DIST) \
 		$(shell find $(SUBDIRS) -type f)
 	$(RMDIR) $(NAME)-$(VER)
 	$(MKDIR) $(NAME)-$(VER)
 	$(COPY) $(EXTRA_DIST) $(SUBDIRS) $(NAME)-$(VER)
-	$(PACK1) $(NAME)-$(VER)$(PACK1_EXT) $(NAME)-$(VER)
-	$(PACK2) $(NAME)-$(VER)$(PACK1_EXT)
+	$(PACK) $(FILE_ARCH_SRC) $(NAME)-$(VER)
 	$(RMDIR) $(NAME)-$(VER)
 
 package: target/$(NAME)-$(VER).jar
