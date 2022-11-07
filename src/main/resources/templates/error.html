@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head profile="http://www.w3.org/2005/10/profile">
+<!-- 
+Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+
+This file is part of Meqaris (Meeting Equipment and Room Invitation System),
+ software that allows booking meeting rooms and other resources using
+ e-mail invitations.
+Meqaris homepage: https://meqaris.sourceforge.io/
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="stylesheet" type="text/css"
+	href="../static/rsrc/meqaris.css" th:href="@{/rsrc/meqaris.css}" />
+<link rel="icon" type="image/svg+xml"
+	href="../static/rsrc/meqaris-icon.svg" th:href="@{/rsrc/meqaris-icon.svg}">
+
+<title>Error - Meqaris Web UI</title>
+
+<meta name="Author" content="Bogdan Drozdowski" />
+<meta name="Language" content="en" />
+</head>
+<body>
+	<h1 class="c">Error</h1>
+
+<p th:if="${not #strings.isEmpty(meq_err_message)}"
+	>Error message: <span th:text="${meq_err_message}"
+	></span></p>
+<p th:if="${not #strings.isEmpty(meq_err_code)}"
+	>Error code: <span th:text="${meq_err_code}"
+	></span></p>
+<pre th:if="${not #strings.isEmpty(meq_err_exception)}"
+	th:text="${meq_err_exception}"></pre>
+</body>
+</html>
