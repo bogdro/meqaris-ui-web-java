@@ -1,4 +1,4 @@
-# Meqaris Makefile
+# Meqaris UI Web Java - Makefile
 #
 # Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
 #
@@ -22,7 +22,7 @@
 #
 
 NAME = meqaris-ui-web-java
-VER = 0.4
+VER = 0.5
 
 RMDIR = /bin/rm -fr
 # when using '-p', no error is generated when the directory exists
@@ -64,6 +64,9 @@ $(FILE_ARCH_SRC): $(EXTRA_DIST) \
 package: target/$(NAME)-$(VER).jar
 
 target/$(NAME)-$(VER).jar: $(shell find src -type f)
-	$(MAVEN) package
+	$(MAVEN) clean package
 
-.PHONY: all dist package
+clean:
+	$(MAVEN) clean
+
+.PHONY: all clean dist package
