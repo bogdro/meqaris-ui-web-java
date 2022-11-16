@@ -55,7 +55,7 @@ public class IndexController {
 			Model model
 		) {
 
-		chooser.setFileName("/etc/meqaris.ini");
+		chooser.setFileName(Chooser.DEF_CFG_FILE_NAME);
 		return INDEX_VIEW_NAME;
 	}
 }

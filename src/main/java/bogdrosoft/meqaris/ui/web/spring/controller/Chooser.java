@@ -61,6 +61,11 @@ public class Chooser {
 	 */
 	public static final String ATTR_RES_RESERV = "meq_resources_reserv";
 
+	/**
+	 * The default name of the configuration file.
+	 */
+	public static final String DEF_CFG_FILE_NAME = "/etc/meqaris.ini";
+
 	@NotNull
 	@Size(min = 1)
 	private String fileName;
