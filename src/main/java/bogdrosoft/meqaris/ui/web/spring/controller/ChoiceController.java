@@ -22,16 +22,12 @@
 
 package bogdrosoft.meqaris.ui.web.spring.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.ini4j.Ini;
-import org.postgresql.ds.PGSimpleDataSource;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +35,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
 
 /**
  * The Spring controller for the /choose page.
@@ -55,7 +53,7 @@ public class ChoiceController {
 	private static final String MODEL_ATTR_DB_CONN = "db_conn";
 	private static final String PARAM_CFG_NAME = "cfg";
 
-	private JdbcTemplate jdbc;
+	private DbManager db;
 
 	/**
 	 * Serves the GET requests to get the data.
@@ -74,21 +72,17 @@ public class ChoiceController {
 		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		if (Chooser.FORM_PARAM_NAME_CONFIG.equals(cfgName)) {
 
-			List<Map<String, Object>> res = jdbc.queryForList(
-					"select c_name, c_value, c_description from meq_config order by c_name");
+			List<Map<String, Object>> res = db.getConfig();
 			model.addAttribute(Chooser.ATTR_CONFIG, res);
 
 		} else if (Chooser.FORM_PARAM_NAME_RESOURCES.equals(cfgName)) {
 		
-			List<Map<String, Object>> res = jdbc.queryForList(
-					"select r_id, r_name, r_email, r_description, r_enabled from meq_resources order by r_id");
+			List<Map<String, Object>> res = db.getResources();
 			model.addAttribute(Chooser.ATTR_RES, res);
 
 		} else if (Chooser.FORM_PARAM_NAME_RESERVATIONS.equals(cfgName)) {
 
-			List<Map<String, Object>> res = jdbc.queryForList(
-					"select rr_r_id, rr_interval, rr_organiser, rr_summary from meq_resource_reservations"
-					+ " order by lower(rr_interval) desc, rr_id desc");
+			List<Map<String, Object>> res = db.getResourceReservations();
 			model.addAttribute(Chooser.ATTR_RES_RESERV, res);
 		}
 		return CHOICE_VIEW_NAME;
@@ -106,7 +100,7 @@ public class ChoiceController {
 			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) @Valid Chooser c,
 			BindingResult res,	// NOTE: this MUST be the second parameter in the method!
 			Model model
-		) throws IOException {
+		) throws Exception {
 
 		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		if (res.hasErrors()) {
@@ -116,43 +110,16 @@ public class ChoiceController {
 		}
 
 		String name = c.getFileName();
-		if (name == null) {
+		try {
+			db = new DbManager(name);
+		}
+		catch (Exception ex) {
 
-			res.rejectValue("fileName", "fileName.empty", "File not provided.");
+			res.rejectValue("fileName", "fileName.error", ex.getMessage());
 			// don't redirect or the error is lost
 			return IndexController.INDEX_VIEW_NAME;
 		}
-
-		File cfgFile = new File(name);
-		if (! cfgFile.exists() || ! cfgFile.canRead()) {
-
-			res.rejectValue("fileName", "fileName.error", "File doesn't exist or cannot be read.");
-			// don't redirect or the error is lost
-			return IndexController.INDEX_VIEW_NAME;
-		}
-
-		Ini ini = new Ini(cfgFile);
-		String dbType = ini.get("meqaris").get("dbtype");
-		if (! "postgresql".equalsIgnoreCase(dbType)) {
-
-			res.rejectValue("fileName", "fileName.error", "The database in the provided file is not PostgreSQL.");
-			// don't redirect or the error is lost
-			return IndexController.INDEX_VIEW_NAME;
-		}
-
-		Ini.Section dbSection = ini.get(dbType);
-
-		PGSimpleDataSource ds = new PGSimpleDataSource();
-		ds.setUser(dbSection.get("username"));
-		ds.setPassword(dbSection.get("password"));
-		ds.setDatabaseName(dbSection.get("dbname"));
-		ds.setServerNames(new String[] {dbSection.get("host")});
-		ds.setPortNumbers(new int[] {Integer.parseInt(dbSection.get("port"))});
-		ds.setConnectTimeout(Integer.parseInt(dbSection.get("connect_timeout", "30")));
-		/*ds.setUrl("jdbc:postgresql://" + dbSection.get("host")
-			+ ":" + dbSection.get("port") + "/meqaris");*/
-		jdbc = new JdbcTemplate(ds);
-		model.addAttribute(MODEL_ATTR_DB_CONN, jdbc);
+		model.addAttribute(MODEL_ATTR_DB_CONN, db);
 
 		return CHOICE_VIEW_NAME;
 	}

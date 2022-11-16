@@ -14,6 +14,11 @@ public class DbManager {
 
 	public DbManager(String fileName) throws Exception {
 
+		if (fileName == null) {
+
+			throw new IllegalArgumentException("Configuration file name not provided.");
+		}
+
 		File cfgFile = new File(fileName);
 		if (! cfgFile.exists() || ! cfgFile.canRead()) {
 
