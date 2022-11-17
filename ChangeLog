@@ -1,3 +1,18 @@
+2022-11-17	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 0.6:
+	  Added classes for database entities and a REST-like interface.
+	  Improvements in the build system. Other small changes.
+	* bogdrosoft/meqaris/ui/web/spring/db: A new package for DB-related
+	  classes (entity + query manager).
+	* bogdrosoft/meqaris/ui/web/spring/rest: A new package for controllers
+	  related to the new REST interface.
+	* Chooser.java, IndexController.java: One common place for the default
+	  configuration file name.
+	* Makefile: Do a 'clean' when doing 'package'. Added a separate
+	  'clean' target. Compare the version in the Makefile and pom.xml.
+	  Bump version.
+
 2022-11-07	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
 
 	* Meqaris-UI-web-java version 0.4:

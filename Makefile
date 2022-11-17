@@ -22,13 +22,15 @@
 #
 
 NAME = meqaris-ui-web-java
-VER = 0.5
+VER = 0.6
 
 RMDIR = /bin/rm -fr
 # when using '-p', no error is generated when the directory exists
 MKDIR = /bin/mkdir -p
 COPY = /bin/cp -pRf
 CHMOD = /bin/chmod
+GREP = /bin/grep
+PERL = /usr/bin/perl
 
 # Use the GNU tar format
 # ifneq ($(shell tar --version | grep -i bsd),)
@@ -48,6 +50,12 @@ EXTRA_DIST = AUTHORS ChangeLog COPYING INSTALL-*.txt \
 	Makefile NEWS pom.xml README
 
 FILE_ARCH_SRC = $(NAME)-$(VER)-src.$(PACK_EXT)
+
+POM_VER = $(shell $(GREP) MEQ_UI_VERSION pom.xml | $(PERL) -pe 's#\s*<version>([^<]+)</version>.*#$$1#')
+
+ifneq ($(VER),$(POM_VER))
+$(error Version mismatch - $(VER) vs $(POM_VER))
+endif
 
 all:	package
 

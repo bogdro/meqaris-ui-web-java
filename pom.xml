@@ -13,7 +13,7 @@
 	</parent>
 	<groupId>bogdrosoft.meqaris</groupId>
 	<artifactId>meqaris-ui-web-java</artifactId>
-	<version>0.1</version>
+	<version>0.6</version> <!-- MEQ_UI_VERSION -->
 	<name>Meqaris Web UI</name>
 	<description>Meqaris Web UI</description>
 	<properties>
