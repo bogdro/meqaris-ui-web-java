@@ -42,6 +42,13 @@ public class Status {
 	private String lockDirMsg;
 	private String dbConnMsg;
 
+	private Boolean cfgFileStatus;
+	private Boolean cfgStatus;
+	private Boolean log4PerlFileStatus;
+	private Boolean sqlDirStatus;
+	private Boolean lockDirStatus;
+	private Boolean dbConnStatus;
+
 	public String getCfgFileMsg() {
 		return cfgFileMsg;
 	}
@@ -90,9 +97,58 @@ public class Status {
 		this.dbConnMsg = dbConnMsg;
 	}
 
+	public Boolean getCfgFileStatus() {
+		return cfgFileStatus;
+	}
+
+	public void setCfgFileStatus(Boolean cfgFileStatus) {
+		this.cfgFileStatus = cfgFileStatus;
+	}
+
+	public Boolean getCfgStatus() {
+		return cfgStatus;
+	}
+
+	public void setCfgStatus(Boolean cfgStatus) {
+		this.cfgStatus = cfgStatus;
+	}
+
+	public Boolean getLog4PerlFileStatus() {
+		return log4PerlFileStatus;
+	}
+
+	public void setLog4PerlFileStatus(Boolean log4PerlFileStatus) {
+		this.log4PerlFileStatus = log4PerlFileStatus;
+	}
+
+	public Boolean getSqlDirStatus() {
+		return sqlDirStatus;
+	}
+
+	public void setSqlDirStatus(Boolean sqlDirStatus) {
+		this.sqlDirStatus = sqlDirStatus;
+	}
+
+	public Boolean getLockDirStatus() {
+		return lockDirStatus;
+	}
+
+	public void setLockDirStatus(Boolean lockDirStatus) {
+		this.lockDirStatus = lockDirStatus;
+	}
+
+	public Boolean getDbConnStatus() {
+		return dbConnStatus;
+	}
+
+	public void setDbConnStatus(Boolean dbConnStatus) {
+		this.dbConnStatus = dbConnStatus;
+	}
+
 	public static Status checkStatus(String filePath) {
 
 		Status s = new Status();
+
 		s.setCfgFileMsg("Main configuration file: Not checked");
 		s.setCfgMsg("Configuration: Not checked");
 		s.setLog4PerlFileMsg("Log4perl configuration file: Not checked");
@@ -103,6 +159,7 @@ public class Status {
 		if (filePath == null) {
 
 			s.setCfgFileMsg("Main configuration file: file path not provided.");
+			s.setCfgFileStatus(Boolean.FALSE);
 			return s;
 		}
 
@@ -111,9 +168,11 @@ public class Status {
 
 			s.setCfgFileMsg("Main configuration file: '"
 					+ filePath + "' doesn't exist, is not a file or cannot be read.");
+			s.setCfgFileStatus(Boolean.FALSE);
 			return s;
 		}
 		s.setCfgFileMsg("Main configuration file: OK");
+		s.setCfgFileStatus(Boolean.TRUE);
 
 		Ini ini;
 		try {
@@ -122,6 +181,7 @@ public class Status {
 
 			s.setCfgMsg("Main configuration file: file '"
 					+ filePath + "' has invalid format.");
+			s.setCfgStatus(Boolean.FALSE);
 			return s;
 		}
 
@@ -132,6 +192,7 @@ public class Status {
 
 			s.setCfgMsg("Configuration data: file '"
 					+ filePath + "' has invalid format: section 'meqaris' is missing.");
+			s.setCfgStatus(Boolean.FALSE);
 			return s;
 		}
 
@@ -139,6 +200,7 @@ public class Status {
 
 			s.setCfgMsg("Configuration data: file '"
 					+ filePath + "' has invalid format: section 'meqaris' is missing.");
+			s.setCfgStatus(Boolean.FALSE);
 			return s;
 		}
 
@@ -150,6 +212,7 @@ public class Status {
 
 				s.setCfgMsg("Configuration data: "
 						+ " section 'meqaris' is missing the setting '" + ms + "'.");
+				s.setCfgStatus(Boolean.FALSE);
 				return s;
 			}
 		}
@@ -163,10 +226,12 @@ public class Status {
 
 				s.setCfgMsg("Configuration data: "
 						+ " database section is missing the setting '" + ds + "'.");
+				s.setCfgStatus(Boolean.FALSE);
 				return s;
 			}
 		}
 		s.setCfgMsg("Configuration data: OK");
+		s.setCfgStatus(Boolean.TRUE);
 
 		String l4pPath = meqarisSection.get("log4perl_config_location");
 		File log4perlCfg = new File(l4pPath);
@@ -174,9 +239,11 @@ public class Status {
 
 			s.setLog4PerlFileMsg("Log4perl configuration file: file '"
 					+ l4pPath + "' doesn't exist, is not a file or cannot be read.");
+			s.setLog4PerlFileStatus(Boolean.FALSE);
 			return s;
 		}
 		s.setLog4PerlFileMsg("Log4perl configuration file: OK");
+		s.setLog4PerlFileStatus(Boolean.TRUE);
 
 		String sqlPath = meqarisSection.get("datadir") + "/sql";
 		File sqlDir = new File(sqlPath);
@@ -184,9 +251,11 @@ public class Status {
 
 			s.setSqlDirMsg("SQL directory: '"
 					+ sqlPath + "' doesn't exist or is not a directory.");
+			s.setSqlDirStatus(Boolean.FALSE);
 			return s;
 		}
 		s.setSqlDirMsg("SQL directory: OK");
+		s.setSqlDirStatus(Boolean.TRUE);
 
 		String lockPath = meqarisSection.get("lock_dir");
 		File lockDir = new File(lockPath);
@@ -194,9 +263,11 @@ public class Status {
 
 			s.setLockDirMsg("Lock file directory: '"
 					+ lockPath + "' doesn't exist or is not a directory.");
+			s.setLockDirStatus(Boolean.FALSE);
 			return s;
 		}
 		s.setLockDirMsg("Lock file directory: OK");
+		s.setLockDirStatus(Boolean.TRUE);
 
 		DbManager db;
 		try {
@@ -206,9 +277,11 @@ public class Status {
 
 			s.setDbConnMsg("Database connection: ERROR: '"
 					+ e.getMessage() + "'.");
+			s.setDbConnStatus(Boolean.FALSE);
 			return s;
 		}
 		s.setDbConnMsg("Database connection: OK");
+		s.setDbConnStatus(Boolean.TRUE);
 
 		return s;
 	}
