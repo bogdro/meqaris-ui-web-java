@@ -118,7 +118,9 @@ public class ChoiceController {
 		}
 		catch (Exception ex) {
 
-			res.rejectValue("fileName", "fileName.error", ex.getMessage());
+			String msg = ex.getMessage();
+			res.rejectValue("fileName", "fileName.error",
+					(msg != null)? msg : "Check the configuration file. Exception: " + ex);
 			// don't redirect or the error is lost
 			return IndexController.INDEX_VIEW_NAME;
 		}
