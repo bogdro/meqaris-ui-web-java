@@ -77,4 +77,7 @@ target/$(NAME)-$(VER).jar: $(shell find src -type f)
 clean:
 	$(MAVEN) clean
 
-.PHONY: all clean dist package
+run:
+	$(MAVEN) clean spring-boot:run
+
+.PHONY: all clean dist package run
