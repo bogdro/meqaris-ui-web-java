@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import bogdrosoft.meqaris.ui.web.spring.Status;
 import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
 
 /**
@@ -51,6 +52,8 @@ public class ChoiceController {
 	public static final String CHOICE_VIEW_NAME = "choose";
 
 	private static final String MODEL_ATTR_DB_CONN = "db_conn";
+	private static final String MODEL_ATTR_STATUS = "status";
+
 	private static final String PARAM_CFG_NAME = "cfg";
 
 	private DbManager db;
@@ -120,6 +123,7 @@ public class ChoiceController {
 			return IndexController.INDEX_VIEW_NAME;
 		}
 		model.addAttribute(MODEL_ATTR_DB_CONN, db);
+		model.addAttribute(MODEL_ATTR_STATUS, Status.checkStatus(name));
 
 		return CHOICE_VIEW_NAME;
 	}

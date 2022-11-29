@@ -38,6 +38,17 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 <body>
 	<h1 class="c">Select data to display</h1>
 
+<p th:unless="${#lists.isEmpty(status)}">
+Configuration status:
+</p>
+<ul th:unless="${#lists.isEmpty(status)}">
+ <li th:text="${status.cfgFileMsg}"></li>
+ <li th:text="${status.cfgMsg}"></li>
+ <li th:text="${status.log4PerlFileMsg}"></li>
+ <li th:text="${status.sqlDirMsg}"></li>
+ <li th:text="${status.lockDirMsg}"></li>
+ <li th:text="${status.dbConnMsg}"></li>
+</ul>
 <p>
 Choose what to display:
 </p>
