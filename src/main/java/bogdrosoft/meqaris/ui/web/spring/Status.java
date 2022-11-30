@@ -218,6 +218,14 @@ public class Status {
 		}
 
 		Ini.Section dbSection = ini.get(meqarisSection.get("dbtype"));
+		if (dbSection == null) {
+
+			s.setCfgMsg("Configuration data: file '"
+					+ filePath + "' has invalid format: the database section is missing.");
+			s.setCfgStatus(Boolean.FALSE);
+			return s;
+		}
+
 		String[] dbSettings = new String[]
 				{"username", "password", "dbname", "host", "port", "connect_timeout"};
 		for (String ds : dbSettings) {

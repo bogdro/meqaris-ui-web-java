@@ -29,7 +29,7 @@ public class MeqResourceReservations {
 	private Long resourceId;
 
 	@Column(name = "rr_interval", nullable = false, insertable = false, updatable = false)
-	private Object interval; // FIXME
+	private Object interval;
 
 	@Column(name = "rr_organiser", nullable = false, insertable = false, updatable = false)
 	private String organiser;

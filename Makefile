@@ -80,4 +80,7 @@ clean:
 run:
 	$(MAVEN) clean spring-boot:run
 
-.PHONY: all clean dist package run
+test:
+	$(MAVEN) clean test
+
+.PHONY: all clean dist package run test

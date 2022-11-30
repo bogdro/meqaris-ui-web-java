@@ -54,7 +54,7 @@ public class ChoiceController {
 	private static final String MODEL_ATTR_DB_CONN = "db_conn";
 	private static final String MODEL_ATTR_STATUS = "status";
 
-	private static final String PARAM_CFG_NAME = "cfg";
+	protected static final String PARAM_CFG_NAME = "cfg";
 
 	private DbManager db;
 
