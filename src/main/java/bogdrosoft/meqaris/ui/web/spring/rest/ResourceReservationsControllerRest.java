@@ -50,17 +50,17 @@ public class ResourceReservationsControllerRest {
 
 		DbManager db = new DbManager(fileName);
 		List<Map<String, Object>> resv = db.getResourceReservationById(Long.valueOf(id));
-		if (resv != null) {
-			for (Map<String, Object> row : resv) {
-
-				if (row == null) {
-					continue;
-				}
-				return new ResponseEntity<MeqResourceReservations>(
-						MeqResourceReservations.buildFromMap(row), HttpStatus.OK);
+		MeqResourceReservations ret = null;
+		if (resv != null && ! resv.isEmpty()) {
+			Map<String, Object> row = resv.get(0);
+			if (row != null) {
+				ret = MeqResourceReservations.buildFromMap(row);
 			}
 		}
-		return new ResponseEntity<MeqResourceReservations>(
-				(MeqResourceReservations)null, HttpStatus.NOT_FOUND);
+		HttpStatus code = HttpStatus.OK;
+		if (ret == null) {
+			code = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<MeqResourceReservations>(ret, code);
 	}
 }

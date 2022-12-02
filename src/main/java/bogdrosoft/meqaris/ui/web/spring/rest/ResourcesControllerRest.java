@@ -50,17 +50,17 @@ public class ResourcesControllerRest {
 
 		DbManager db = new DbManager(fileName);
 		List<Map<String, Object>> rsrc = db.getResourceById(Long.valueOf(id));
-		if (rsrc != null) {
-			for (Map<String, Object> row : rsrc) {
-
-				if (row == null) {
-					continue;
-				}
-				return new ResponseEntity<MeqResources>(
-						MeqResources.buildFromMap(row), HttpStatus.OK);
+		MeqResources ret = null;
+		if (rsrc != null && ! rsrc.isEmpty()) {
+			Map<String, Object> row = rsrc.get(0);
+			if (row != null) {
+				ret = MeqResources.buildFromMap(row);
 			}
 		}
-		return new ResponseEntity<MeqResources>(
-				(MeqResources)null, HttpStatus.NOT_FOUND);
+		HttpStatus code = HttpStatus.OK;
+		if (ret == null) {
+			code = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<MeqResources>(ret, code);
 	}
 }

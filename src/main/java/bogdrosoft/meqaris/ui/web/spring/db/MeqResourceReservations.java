@@ -178,10 +178,10 @@ public class MeqResourceReservations {
 				// e.g. 20220428T220223Z
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'X");
 				Calendar c = Calendar.getInstance();
-				c.setTimeInMillis(0);
 				try {
 					c.setTime(sdf.parse(String.valueOf(dtstamp)));
 				} catch (ParseException e) {
+					c.setTimeInMillis(0);
 				}
 				rr.setDateTimestamp(c);
 			}

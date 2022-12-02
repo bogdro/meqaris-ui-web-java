@@ -33,8 +33,8 @@ public class ConfigControllerRest {
 					continue;
 				}
 				if (name != null) {
-					Object name_col = row.get("c_name");
-					if (name_col != null && name.equals(name_col.toString())) {
+					Object nameCol = row.get("c_name");
+					if (nameCol != null && name.equals(nameCol.toString())) {
 
 						res.add(MeqConfig.buildFromMap(row));
 						break;
