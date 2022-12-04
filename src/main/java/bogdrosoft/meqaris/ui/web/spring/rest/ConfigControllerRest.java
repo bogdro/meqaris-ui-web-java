@@ -27,8 +27,11 @@ public class ConfigControllerRest {
 		DbManager db = new DbManager(fileName);
 		List<Map<String, Object>> config = db.getConfig();
 		if (config != null) {
-			for (Map<String, Object> row : config) {
 
+			int size = config.size();
+			for (int i = 0; i < size; i++) {
+
+				Map<String, Object> row = config.get(i);
 				if (row == null) {
 					continue;
 				}

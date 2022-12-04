@@ -29,8 +29,10 @@ public class ResourcesControllerRest {
 		DbManager db = new DbManager(fileName);
 		List<Map<String, Object>> rsrc = db.getResources();
 		if (rsrc != null) {
-			for (Map<String, Object> row : rsrc) {
+			int size = rsrc.size();
+			for (int i = 0; i < size; i++) {
 
+				Map<String, Object> row = rsrc.get(i);
 				if (row == null) {
 					continue;
 				}

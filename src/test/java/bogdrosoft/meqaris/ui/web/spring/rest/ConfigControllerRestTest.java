@@ -31,20 +31,25 @@ public class ConfigControllerRestTest {
 		return cfgs;
 	}
 
+	private void findConfigValue(List<Map<String, Object>> cfgs, String name) {
+
+		int size = cfgs.size();
+		for (int i = 0; i < size; i++) {
+
+			Map<String, Object> row = cfgs.get(i);
+			if (name.equals(row.get("name"))) {
+				return;
+			}
+		}
+		fail("The required configuration '" + name + "' not found");
+	}
+
 	@Test
 	public void testFullConfig() throws Exception {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir);
-		int size = cfgs.size();
-		for (int i = 0; i < size; i++) {
-
-			Map<String, Object> row = cfgs.get(i);
-			if ("db_version".equals(row.get("name"))) {
-				return;
-			}
-		}
-		fail("The required 'db_version' configuration not found");
+		findConfigValue (cfgs, "db_version");
 	}
 
 	@Test
@@ -52,14 +57,14 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=db_version");
-		int size = cfgs.size();
-		for (int i = 0; i < size; i++) {
+		findConfigValue (cfgs, "db_version");
+	}
 
-			Map<String, Object> row = cfgs.get(i);
-			if ("db_version".equals(row.get("name"))) {
-				return;
-			}
-		}
-		fail("The required 'db_version' configuration not found");
+	@Test
+	public void testMailServer() throws Exception {
+
+		String dir = TestHelper.getFullPathFor("good.ini");
+		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=mail_server");
+		findConfigValue (cfgs, "mail_server");
 	}
 }
