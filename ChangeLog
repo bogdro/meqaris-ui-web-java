@@ -1,3 +1,29 @@
+2022-12-04	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 1.0:
+	  Added displaying the Meqaris file and configuration status, like the
+	  `meqaris --status` command + a REST-like interface. Added unit tests
+	  for all the source files. Improvements in the build system. Other
+	  small changes.
+	* ChoiceController.java (choicePagePost), choose.html, Status.java:
+	  Added displaying the Meqaris status, like the `meqaris --status`
+	  command.
+	* ChoiceController.java (choicePagePost): Use a default error message
+	  with the exception type when exception's message is missing to
+	  prevent application from crashing.
+	* StatusControllerRest.java: Added a REST-like interface for the
+	  status check.
+	* src/test: Added unit tests and their necessary resources. Current
+	  coverage: src/main: 98.1%, src/test: 98.4%, total: 98.3%.
+	* ChoiceController.java, Status.java, MeqResourceReservations.java:
+	  made the necessary changes for unit tests, other small changes.
+	* MeqResourceReservations.java, ResourcesControllerRest.java,
+	  ConfigControllerRest.java, ResourceReservationsControllerRest.java:
+	  Fixed code quality problems reported by external tools.
+	* Makefile: Added a 'run' target to run 'mvn clean spring-boot:run'.
+	  Added a 'test' target to run 'mvn clean test'.
+	* pom.xml: Added the test resource directory property for tests.
+
 2022-11-17	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
 
 	* Meqaris-UI-web-java version 0.6:
