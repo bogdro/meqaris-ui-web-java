@@ -101,7 +101,7 @@ public class ChoiceController {
 	@PostMapping("/" + CHOICE_VIEW_NAME)
 	public String choicePagePost(
 			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) @Valid Chooser c,
-			BindingResult res,	// NOTE: this MUST be the second parameter in the method!
+			BindingResult res,	// NOTE: this MUST be the next parameter after the Chooser!
 			Model model
 		) throws Exception {
 
