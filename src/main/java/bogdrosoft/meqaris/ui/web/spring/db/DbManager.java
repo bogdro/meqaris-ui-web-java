@@ -70,8 +70,7 @@ public class DbManager {
 	public List<Map<String, Object>> getResourceReservations() {
 
 		return jdbc.queryForList(
-				"select rr_id, rr_r_id, rr_interval, rr_organiser, rr_summary,"
-				+ " rr_dtstamp, rr_uid, rr_seq, rr_data"
+				"select rr_id, rr_r_id, rr_interval, rr_e_id"
 				+ " from meq_resource_reservations"
 				+ " order by lower(rr_interval) desc, rr_id desc");
 	}
@@ -79,9 +78,26 @@ public class DbManager {
 	public List<Map<String, Object>> getResourceReservationById(Long id) {
 
 		return jdbc.queryForList(
-				"select rr_id, rr_r_id, rr_interval, rr_organiser, rr_summary,"
-				+ " rr_dtstamp, rr_uid, rr_seq, rr_data"
+				"select rr_id, rr_r_id, rr_interval, rr_e_id"
 				+ " from meq_resource_reservations"
 				+ " where rr_id = ?", id);
+	}
+
+	public List<Map<String, Object>> getEvents() {
+
+		return jdbc.queryForList(
+				"select e_id, e_entry_date, e_organiser, e_summary,"
+				+ " e_dtstamp, e_uid, e_seq, e_data"
+				+ " from meq_events"
+				+ " order by e_id");
+	}
+
+	public List<Map<String, Object>> getEventById(Long id) {
+
+		return jdbc.queryForList(
+				"select e_id, e_entry_date, e_organiser, e_summary,"
+				+ " e_dtstamp, e_uid, e_seq, e_data"
+				+ " from meq_events"
+				+ " where e_id = ?", id);
 	}
 }
