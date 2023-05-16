@@ -8,7 +8,9 @@ Meqaris (Meeting Equipment and Room Invitation System) is a system that
 Meqaris Web User Interface allows to:
 - view Meqaris configuration,
 - view meeting resources, like rooms or equipment,
-- view all resource reservations (current and past).
+- view all resource reservations (current and past),
+- view all events,
+- view configured CalDAV servers and their resource assignments.
 
 Requirements:
 
