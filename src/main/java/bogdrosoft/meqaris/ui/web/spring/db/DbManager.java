@@ -100,4 +100,22 @@ public class DbManager {
 				+ " from meq_events"
 				+ " where e_id = ?", id);
 	}
+
+	public List<Map<String, Object>> getCalDavServers() {
+
+		return jdbc.queryForList(
+				"select cals_id, cals_name, cals_url, cals_username,"
+				+ " cals_password, cals_realm"
+				+ " from meq_caldav_servers"
+				+ " order by cals_id");
+	}
+
+	public List<Map<String, Object>> getCalDavServerById(Long id) {
+
+		return jdbc.queryForList(
+				"select cals_id, cals_name, cals_url, cals_username,"
+				+ " cals_password, cals_realm"
+				+ " from meq_caldav_servers"
+				+ " where cals_id = ?", id);
+	}
 }

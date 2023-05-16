@@ -92,6 +92,11 @@ public class ChoiceController {
 
 			List<Map<String, Object>> res = db.getEvents();
 			model.addAttribute(Chooser.ATTR_EVENTS, res);
+
+		} else if (Chooser.FORM_PARAM_NAME_CALDAV_SERVERS.equals(cfgName)) {
+
+			List<Map<String, Object>> res = db.getCalDavServers();
+			model.addAttribute(Chooser.ATTR_CALDAV_SERVERS, res);
 		}
 		return CHOICE_VIEW_NAME;
 	}

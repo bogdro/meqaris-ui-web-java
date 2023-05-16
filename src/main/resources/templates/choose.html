@@ -61,6 +61,8 @@ Choose what to display:
 		hreflang="en">Resource reservations</a></li>
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_EVENTS)).build()}"
 		hreflang="en">Events</a></li>
+	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_CALDAV_SERVERS)).build()}"
+		hreflang="en">CalDAV servers</a></li>
 </ul>
 <p>
 <a th:href="${(#mvc.url('IC#indexPage')).build()}" hreflang="en">Back to file selection</a>
@@ -139,6 +141,27 @@ Choose what to display:
 			<tr th:each="ev : ${__${chooser.ATTR_EVENTS}__}">
 				<td th:text="${ev.e_id}"></td>
 				<td th:text="${ev.e_summary}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div th:unless="${#lists.isEmpty(__${chooser.ATTR_CALDAV_SERVERS}__)}">
+	<table>
+		<caption>CalDAV servers</caption>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>URL</th>
+				<th>User</th>
+				<th>Realm</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="srv : ${__${chooser.ATTR_CALDAV_SERVERS}__}">
+				<td th:text="${srv.cals_name}"></td>
+				<td th:text="${srv.cals_url}"></td>
+				<td th:text="${srv.cals_username}"></td>
+				<td th:text="${srv.cals_realm}"></td>
 			</tr>
 		</tbody>
 	</table>
