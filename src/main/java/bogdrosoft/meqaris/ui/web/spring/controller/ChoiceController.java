@@ -87,6 +87,11 @@ public class ChoiceController {
 
 			List<Map<String, Object>> res = db.getResourceReservations();
 			model.addAttribute(Chooser.ATTR_RES_RESERV, res);
+
+		} else if (Chooser.FORM_PARAM_NAME_EVENTS.equals(cfgName)) {
+
+			List<Map<String, Object>> res = db.getEvents();
+			model.addAttribute(Chooser.ATTR_EVENTS, res);
 		}
 		return CHOICE_VIEW_NAME;
 	}

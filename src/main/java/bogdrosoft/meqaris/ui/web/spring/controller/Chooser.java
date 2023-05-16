@@ -47,6 +47,11 @@ public class Chooser {
 	public static final String FORM_PARAM_NAME_RESERVATIONS = "meq_res_reserv";
 
 	/**
+	 * The name of the "events" data to get.
+	 */
+	public static final String FORM_PARAM_NAME_EVENTS = "meq_events";
+
+	/**
 	 * The name of the bean that holds the configuration data.
 	 */
 	public static final String ATTR_CONFIG = "meq_cfg";
@@ -60,6 +65,11 @@ public class Chooser {
 	 * The name of the bean that holds the resource reservation data.
 	 */
 	public static final String ATTR_RES_RESERV = "meq_resources_reserv";
+
+	/**
+	 * The name of the bean that holds the event data.
+	 */
+	public static final String ATTR_EVENTS = "meq_events";
 
 	/**
 	 * The default name of the configuration file.
