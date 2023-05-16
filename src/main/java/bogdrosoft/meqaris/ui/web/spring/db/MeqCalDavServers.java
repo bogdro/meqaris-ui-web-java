@@ -23,7 +23,7 @@ public class MeqCalDavServers {
 	@Column(name = "cals_name", nullable = false, insertable = false, updatable = false)
 	private String name;
 
-	@Column(name = "cals_url", nullable = false, insertable = false, updatable = false)
+	@Column(name = "cals_url", nullable = false, unique = true, insertable = false, updatable = false)
 	private String url;
 
 	@Column(name = "cals_username", insertable = false, updatable = false)
