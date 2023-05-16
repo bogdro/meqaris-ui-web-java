@@ -52,9 +52,14 @@ public class Chooser {
 	public static final String FORM_PARAM_NAME_EVENTS = "meq_ev";
 
 	/**
-	 * The name of the "events" data to get.
+	 * The name of the "CalDAV servers" data to get.
 	 */
 	public static final String FORM_PARAM_NAME_CALDAV_SERVERS = "meq_caldav_srv";
+
+	/**
+	 * The name of the "CalDAV server resources" data to get.
+	 */
+	public static final String FORM_PARAM_NAME_CALDAV_SERVERS_RES = "meq_caldav_srv_rsrc";
 
 	/**
 	 * The name of the bean that holds the configuration data.
@@ -77,9 +82,14 @@ public class Chooser {
 	public static final String ATTR_EVENTS = "meq_events";
 
 	/**
-	 * The name of the bean that holds the event data.
+	 * The name of the bean that holds the CalDAV server data.
 	 */
 	public static final String ATTR_CALDAV_SERVERS = "meq_caldav_servers";
+
+	/**
+	 * The name of the bean that holds the CalDAV server resources data.
+	 */
+	public static final String ATTR_CALDAV_SERVERS_RES = "meq_caldav_servers_resources";
 
 	/**
 	 * The default name of the configuration file.

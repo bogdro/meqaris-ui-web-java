@@ -118,4 +118,20 @@ public class DbManager {
 				+ " from meq_caldav_servers"
 				+ " where cals_id = ?", id);
 	}
+
+	public List<Map<String, Object>> getCalDavServersResources() {
+
+		return jdbc.queryForList(
+				"select calres_cals_id, calres_r_id"
+				+ " from meq_caldav_servers_resources"
+				+ " order by calres_cals_id");
+	}
+
+	public List<Map<String, Object>> getCalDavServerResourcesByServerId(Long id) {
+
+		return jdbc.queryForList(
+				"select calres_cals_id, calres_r_id"
+				+ " from meq_caldav_servers_resources"
+				+ " where calres_cals_id = ?", id);
+	}
 }
