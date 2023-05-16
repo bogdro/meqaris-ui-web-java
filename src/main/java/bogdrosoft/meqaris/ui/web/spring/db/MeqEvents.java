@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "meq_resource_reservations")
+@Table(name = "meq_events")
 @Cacheable(false)
 public class MeqEvents {
 
@@ -26,7 +26,7 @@ public class MeqEvents {
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "e_entry_date", insertable = false, updatable = false)
+	@Column(name = "e_entry_date", nullable = false, insertable = false, updatable = false)
 	private Calendar entryDate;
 
 	@Column(name = "e_organiser", nullable = false, insertable = false, updatable = false)
