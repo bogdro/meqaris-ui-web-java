@@ -22,8 +22,6 @@
 #
 
 NAME = meqaris-ui-web-java
-VER = $(shell $(GREP) MEQ_UI_VERSION pom.xml | $(PERL) -pe 's#\s*<version>([^<]+)</version>.*#$$1#')
-
 RMDIR = /bin/rm -fr
 # when using '-p', no error is generated when the directory exists
 MKDIR = /bin/mkdir -p
@@ -31,6 +29,8 @@ COPY = /bin/cp -pRf
 CHMOD = /bin/chmod
 GREP = /bin/grep
 PERL = /usr/bin/perl
+
+VER = $(shell $(GREP) MEQ_UI_VERSION pom.xml | $(PERL) -pe 's#\s*<version>([^<]+)</version>.*#$$1#')
 
 # Use the GNU tar format
 # ifneq ($(shell tar --version | grep -i bsd),)
