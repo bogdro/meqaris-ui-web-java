@@ -36,7 +36,7 @@ public class StatusControllerRest {
 	public Status getConfig(
 			@RequestParam(name = "file", required = false, defaultValue = Chooser.DEF_CFG_FILE_NAME)
 			String fileName
-			) throws Exception {
+			) {
 
 		return Status.checkStatus(fileName);
 	}

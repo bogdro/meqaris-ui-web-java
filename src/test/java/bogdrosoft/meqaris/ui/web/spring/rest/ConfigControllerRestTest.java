@@ -53,17 +53,17 @@ public class ConfigControllerRestTest {
 		return cfgs;
 	}
 
-	private void findConfigValue(List<Map<String, Object>> cfgs, String name) {
+	private boolean findConfigValue(List<Map<String, Object>> cfgs, String name) {
 
 		int size = cfgs.size();
 		for (int i = 0; i < size; i++) {
 
 			Map<String, Object> row = cfgs.get(i);
 			if (name.equals(row.get("name"))) {
-				return;
+				return true;
 			}
 		}
-		fail("The required configuration '" + name + "' not found");
+		return false;
 	}
 
 	@Test
@@ -71,7 +71,9 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir);
-		findConfigValue (cfgs, "db_version");
+		if (! findConfigValue (cfgs, "db_version")) {
+			fail("The required configuration 'db_version' not found");
+		}
 	}
 
 	@Test
@@ -79,7 +81,9 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=db_version");
-		findConfigValue (cfgs, "db_version");
+		if (! findConfigValue (cfgs, "db_version")) {
+			fail("The required configuration 'db_version' not found");
+		}
 	}
 
 	@Test
@@ -87,6 +91,18 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=mail_server");
-		findConfigValue (cfgs, "mail_server");
+		if (! findConfigValue (cfgs, "mail_server")) {
+			fail("The required configuration 'mail_server' not found");
+		}
+	}
+
+	@Test
+	public void testUnknown() throws Exception {
+
+		String dir = TestHelper.getFullPathFor("good.ini");
+		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=blah");
+		if (findConfigValue (cfgs, "blah")) {
+			fail("The configuration 'blah' found, but shouldn't be");
+		}
 	}
 }

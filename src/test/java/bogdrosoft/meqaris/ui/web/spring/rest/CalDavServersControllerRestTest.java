@@ -64,10 +64,11 @@ public class CalDavServersControllerRestTest {
 	public void testFirst() throws Exception {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
-		cc.getForEntity(
+		// this is just to potentially get more coverage
+		ResponseEntity<MeqCalDavServers> r = cc.getForEntity(
 				new URI("http://localhost:" + port + "/caldav_server/1?file=" + dir),
 				MeqCalDavServers.class);
-		// this is just to potentially get more coverage
+		assertNotNull(r);
 	}
 
 	@Test

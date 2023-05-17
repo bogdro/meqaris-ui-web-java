@@ -65,10 +65,11 @@ public class ResourcesReservationsControllerRestTest {
 	public void testFirst() throws Exception {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
-		cc.getForEntity(
+		// this is just to potentially get more coverage
+		ResponseEntity<MeqResourceReservations> r = cc.getForEntity(
 				new URI("http://localhost:" + port + "/reservation/1?file=" + dir),
 				MeqResourceReservations.class);
-		// this is just to potentially get more coverage
+		assertNotNull(r);
 	}
 
 	@Test

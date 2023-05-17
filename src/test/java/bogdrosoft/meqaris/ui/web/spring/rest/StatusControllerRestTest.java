@@ -68,6 +68,13 @@ public class StatusControllerRestTest {
 		assertEquals(Boolean.TRUE, s.getSqlDirStatus());
 	}
 
+	private void checkBadCfgStatusFor(String file) throws Exception {
+
+		Status s = getStatusFor(file);
+		TestHelper.verifyStatus(s);
+		assertEquals(Boolean.FALSE, s.getCfgStatus());
+	}
+
 	@Test
 	public void testStatusMissingFile() throws Exception {
 
@@ -87,9 +94,7 @@ public class StatusControllerRestTest {
 	@Test
 	public void testStatusBadFormat() throws Exception {
 
-		Status s = getStatusFor(TestHelper.getFullPathFor("bad-format.ini"));
-		TestHelper.verifyStatus(s);
-		assertEquals(Boolean.FALSE, s.getCfgStatus());
+		checkBadCfgStatusFor(TestHelper.getFullPathFor("bad-format.ini"));
 	}
 
 	@Test
@@ -106,17 +111,13 @@ public class StatusControllerRestTest {
 	@Test
 	public void testStatusMissingMainSetting() throws Exception {
 
-		Status s = getStatusFor(TestHelper.getFullPathFor("bad-miss-main.ini"));
-		TestHelper.verifyStatus(s);
-		assertEquals(Boolean.FALSE, s.getCfgStatus());
+		checkBadCfgStatusFor(TestHelper.getFullPathFor("bad-miss-main.ini"));
 	}
 
 	@Test
 	public void testStatusMissingDbSetting() throws Exception {
 
-		Status s = getStatusFor(TestHelper.getFullPathFor("bad-miss-db.ini"));
-		TestHelper.verifyStatus(s);
-		assertEquals(Boolean.FALSE, s.getCfgStatus());
+		checkBadCfgStatusFor(TestHelper.getFullPathFor("bad-miss-db.ini"));
 	}
 
 	@Test
@@ -138,9 +139,7 @@ public class StatusControllerRestTest {
 	@Test
 	public void testStatusBadDbType() throws Exception {
 
-		Status s = getStatusFor(TestHelper.getFullPathFor("bad-dbtype.ini"));
-		TestHelper.verifyStatus(s);
-		assertEquals(Boolean.FALSE, s.getCfgStatus());
+		checkBadCfgStatusFor(TestHelper.getFullPathFor("bad-dbtype.ini"));
 	}
 
 	@Test
@@ -189,9 +188,7 @@ public class StatusControllerRestTest {
 	@Test
 	public void testStatusBadSection() throws Exception {
 
-		Status s = getStatusFor(TestHelper.getFullPathFor("bad-section.ini"));
-		TestHelper.verifyStatus(s);
-		assertEquals(Boolean.FALSE, s.getCfgStatus());
+		checkBadCfgStatusFor(TestHelper.getFullPathFor("bad-section.ini"));
 	}
 
 	@Test

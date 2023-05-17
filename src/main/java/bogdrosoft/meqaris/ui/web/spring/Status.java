@@ -156,6 +156,7 @@ public class Status {
 		s.setLockDirMsg("Lock file directory: Not checked");
 		s.setDbConnMsg("Database connection: Not checked");
 
+		String dataErrMsg = "Configuration data: file '";
 		if (filePath == null) {
 
 			s.setCfgFileMsg("Main configuration file: file path not provided.");
@@ -190,7 +191,7 @@ public class Status {
 			meqarisSection = ini.get("meqaris");
 		} catch (Exception e) {
 
-			s.setCfgMsg("Configuration data: file '"
+			s.setCfgMsg(dataErrMsg
 					+ filePath + "' has invalid format: section 'meqaris' is missing.");
 			s.setCfgStatus(Boolean.FALSE);
 			return s;
@@ -198,7 +199,7 @@ public class Status {
 
 		if (meqarisSection == null) {
 
-			s.setCfgMsg("Configuration data: file '"
+			s.setCfgMsg(dataErrMsg
 					+ filePath + "' has invalid format: section 'meqaris' is missing.");
 			s.setCfgStatus(Boolean.FALSE);
 			return s;
@@ -220,7 +221,7 @@ public class Status {
 		Ini.Section dbSection = ini.get(meqarisSection.get("dbtype"));
 		if (dbSection == null) {
 
-			s.setCfgMsg("Configuration data: file '"
+			s.setCfgMsg(dataErrMsg
 					+ filePath + "' has invalid format: the database section is missing.");
 			s.setCfgStatus(Boolean.FALSE);
 			return s;

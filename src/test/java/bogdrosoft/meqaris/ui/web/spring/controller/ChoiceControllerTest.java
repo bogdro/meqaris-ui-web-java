@@ -71,22 +71,22 @@ public class ChoiceControllerTest {
 				.string(containsString("Resource ID")));
 
 		mvc.perform(get("/choose?" + ChoiceController.PARAM_CFG_NAME + "=" + Chooser.FORM_PARAM_NAME_EVENTS))
-		.andDo(print())
-		.andExpect(status().isOk())
-		.andExpect(content()
-			.string(containsString("Event ID")));
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content()
+				.string(containsString("Event ID")));
 
 		mvc.perform(get("/choose?" + ChoiceController.PARAM_CFG_NAME + "=" + Chooser.FORM_PARAM_NAME_CALDAV_SERVERS))
-		.andDo(print())
-		.andExpect(status().isOk())
-		.andExpect(content()
-			.string(containsString("Realm")));
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content()
+				.string(containsString("Realm")));
 
 		mvc.perform(get("/choose?" + ChoiceController.PARAM_CFG_NAME + "=" + Chooser.FORM_PARAM_NAME_CALDAV_SERVERS_RES))
-		.andDo(print())
-		.andExpect(status().isOk())
-		.andExpect(content()
-			.string(containsString("Resource ID")));
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content()
+				.string(containsString("Resource ID")));
 
 		mvc.perform(get("/choose?" + ChoiceController.PARAM_CFG_NAME + "=blah"))
 			.andDo(print())

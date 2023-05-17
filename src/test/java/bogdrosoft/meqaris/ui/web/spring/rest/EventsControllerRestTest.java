@@ -64,10 +64,11 @@ public class EventsControllerRestTest {
 	public void testFirst() throws Exception {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
-		cc.getForEntity(
+		// this is just to potentially get more coverage
+		ResponseEntity<MeqEvents> r = cc.getForEntity(
 				new URI("http://localhost:" + port + "/event/1?file=" + dir),
 				MeqEvents.class);
-		// this is just to potentially get more coverage
+		assertNotNull(r);
 	}
 
 	@Test
