@@ -22,7 +22,7 @@
 #
 
 NAME = meqaris-ui-web-java
-VER = 1.0
+VER = $(shell $(GREP) MEQ_UI_VERSION pom.xml | $(PERL) -pe 's#\s*<version>([^<]+)</version>.*#$$1#')
 
 RMDIR = /bin/rm -fr
 # when using '-p', no error is generated when the directory exists
@@ -50,12 +50,6 @@ EXTRA_DIST = AUTHORS ChangeLog COPYING INSTALL-*.txt \
 	Makefile NEWS pom.xml README
 
 FILE_ARCH_SRC = $(NAME)-$(VER)-src.$(PACK_EXT)
-
-POM_VER = $(shell $(GREP) MEQ_UI_VERSION pom.xml | $(PERL) -pe 's#\s*<version>([^<]+)</version>.*#$$1#')
-
-ifneq ($(VER),$(POM_VER))
-$(error Version mismatch - $(VER) vs $(POM_VER))
-endif
 
 all:	package
 
