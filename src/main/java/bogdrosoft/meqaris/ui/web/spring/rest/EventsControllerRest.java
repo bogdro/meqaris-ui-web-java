@@ -36,20 +36,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bogdrosoft.meqaris.ui.web.spring.controller.Chooser;
 import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
-import bogdrosoft.meqaris.ui.web.spring.db.MeqResourceReservations;
+import bogdrosoft.meqaris.ui.web.spring.db.MeqEvents;
 
 @RestController
-public class ResourceReservationsControllerRest {
+public class EventsControllerRest {
 
-	@GetMapping("/reservations")
-	public List<MeqResourceReservations> getResourceReservations(
+	@GetMapping("/events")
+	public List<MeqEvents> getEvents(
 			@RequestParam(name = "file", required = false, defaultValue = Chooser.DEF_CFG_FILE_NAME)
 			String fileName
 			) throws Exception {
 
-		List<MeqResourceReservations> res = new ArrayList<>();
+		List<MeqEvents> res = new ArrayList<>();
 		DbManager db = new DbManager(fileName);
-		List<Map<String, Object>> resv = db.getResourceReservations();
+		List<Map<String, Object>> resv = db.getEvents();
 		if (resv != null) {
 			int size = resv.size();
 			for (int i = 0; i < size; i++) {
@@ -59,14 +59,14 @@ public class ResourceReservationsControllerRest {
 				if (row == null) {
 					continue;
 				}
-				res.add(MeqResourceReservations.buildFromMap(row));
+				res.add(MeqEvents.buildFromMap(row));
 			}
 		}
 		return res;
 	}
 	
-	@GetMapping("/reservation/{id}")
-	public HttpEntity<MeqResourceReservations> getResourceReservation(
+	@GetMapping("/event/{id}")
+	public HttpEntity<MeqEvents> getEvent(
 			@RequestParam(name = "file", required = false, defaultValue = Chooser.DEF_CFG_FILE_NAME)
 			String fileName,
 			@PathVariable(name = "id", required = true)
@@ -74,18 +74,18 @@ public class ResourceReservationsControllerRest {
 			) throws Exception {
 
 		DbManager db = new DbManager(fileName);
-		List<Map<String, Object>> resv = db.getResourceReservationById(Long.valueOf(id));
-		MeqResourceReservations ret = null;
+		List<Map<String, Object>> resv = db.getEventById(Long.valueOf(id));
+		MeqEvents ret = null;
 		if (resv != null && ! resv.isEmpty()) {
 			Map<String, Object> row = resv.get(0);
 			if (row != null) {
-				ret = MeqResourceReservations.buildFromMap(row);
+				ret = MeqEvents.buildFromMap(row);
 			}
 		}
 		HttpStatus code = HttpStatus.OK;
 		if (ret == null) {
 			code = HttpStatus.NOT_FOUND;
 		}
-		return new ResponseEntity<MeqResourceReservations>(ret, code);
+		return new ResponseEntity<MeqEvents>(ret, code);
 	}
 }

@@ -1,3 +1,25 @@
+/*
+ * Copyright (C) 2022-2023 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+ *
+ * This file is part of Meqaris (Meeting Equipment and Room Invitation System),
+ *  software that allows booking meeting rooms and other resources using
+ *  e-mail invitations.
+ * Meqaris homepage: https://meqaris.sourceforge.io/
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package bogdrosoft.meqaris.ui.web.spring.db;
 
 import java.io.File;
@@ -70,8 +92,7 @@ public class DbManager {
 	public List<Map<String, Object>> getResourceReservations() {
 
 		return jdbc.queryForList(
-				"select rr_id, rr_r_id, rr_interval, rr_organiser, rr_summary,"
-				+ " rr_dtstamp, rr_uid, rr_seq, rr_data"
+				"select rr_id, rr_r_id, rr_interval, rr_e_id"
 				+ " from meq_resource_reservations"
 				+ " order by lower(rr_interval) desc, rr_id desc");
 	}
@@ -79,9 +100,60 @@ public class DbManager {
 	public List<Map<String, Object>> getResourceReservationById(Long id) {
 
 		return jdbc.queryForList(
-				"select rr_id, rr_r_id, rr_interval, rr_organiser, rr_summary,"
-				+ " rr_dtstamp, rr_uid, rr_seq, rr_data"
+				"select rr_id, rr_r_id, rr_interval, rr_e_id"
 				+ " from meq_resource_reservations"
 				+ " where rr_id = ?", id);
+	}
+
+	public List<Map<String, Object>> getEvents() {
+
+		return jdbc.queryForList(
+				"select e_id, e_entry_date, e_organiser, e_summary,"
+				+ " e_dtstamp, e_uid, e_seq, e_data"
+				+ " from meq_events"
+				+ " order by e_id");
+	}
+
+	public List<Map<String, Object>> getEventById(Long id) {
+
+		return jdbc.queryForList(
+				"select e_id, e_entry_date, e_organiser, e_summary,"
+				+ " e_dtstamp, e_uid, e_seq, e_data"
+				+ " from meq_events"
+				+ " where e_id = ?", id);
+	}
+
+	public List<Map<String, Object>> getCalDavServers() {
+
+		return jdbc.queryForList(
+				"select cals_id, cals_name, cals_url, cals_username,"
+				+ " cals_password, cals_realm"
+				+ " from meq_caldav_servers"
+				+ " order by cals_id");
+	}
+
+	public List<Map<String, Object>> getCalDavServerById(Long id) {
+
+		return jdbc.queryForList(
+				"select cals_id, cals_name, cals_url, cals_username,"
+				+ " cals_password, cals_realm"
+				+ " from meq_caldav_servers"
+				+ " where cals_id = ?", id);
+	}
+
+	public List<Map<String, Object>> getCalDavServersResources() {
+
+		return jdbc.queryForList(
+				"select calres_cals_id, calres_r_id"
+				+ " from meq_caldav_servers_resources"
+				+ " order by calres_cals_id");
+	}
+
+	public List<Map<String, Object>> getCalDavServerResourcesByServerId(Long id) {
+
+		return jdbc.queryForList(
+				"select calres_cals_id, calres_r_id"
+				+ " from meq_caldav_servers_resources"
+				+ " where calres_cals_id = ?", id);
 	}
 }

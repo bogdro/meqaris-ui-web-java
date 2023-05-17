@@ -1,3 +1,25 @@
+/*
+ * Copyright (C) 2022-2023 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+ *
+ * This file is part of Meqaris (Meeting Equipment and Room Invitation System),
+ *  software that allows booking meeting rooms and other resources using
+ *  e-mail invitations.
+ * Meqaris homepage: https://meqaris.sourceforge.io/
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package bogdrosoft.meqaris.ui.web.spring.db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -5,39 +27,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class MeqResourceReservationsTest {
 
 	private static final Long ID = Long.valueOf(55L);
 	private static final Long RES_ID = Long.valueOf(77L);
-	private static final String ORGANISER_STR = "a@b.c";
-	private static final String SUMMARY_STR = "sssss";
-	private static final String UID_STR = "test-uid";
-	private static final String DATA_STR = "test-data";
-	private static final Integer SEQ = Integer.valueOf(111);
+	private static final Long EV_ID = Long.valueOf(99L);
 
 	private static final String INTERVAL_STR = "[\"2022-04-28 01:00:00+02\",\"2022-04-28 02:00:00+02\")";
-	private static Object interval;
-
-	private static final String DTSTAMP_STR = "20220428T220223Z+0000";
-	private static Object dtstamp;
-
-	@BeforeAll
-	public static void prepare() throws Exception {
-
-		interval = INTERVAL_STR /*new org.postgresql.util.PGInterval(INTERVAL_STR)*/;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'X");
-		Calendar c = Calendar.getInstance();
-		c.setTime(sdf.parse(DTSTAMP_STR));
-		dtstamp = c;
-	}
 
 	private Map<String, Object> prepareInput() {
 
@@ -45,12 +46,7 @@ public class MeqResourceReservationsTest {
 		input.put("rr_id", ID);
 		input.put("rr_r_id", RES_ID);
 		input.put("rr_interval", INTERVAL_STR);
-		input.put("rr_organiser", ORGANISER_STR);
-		input.put("rr_summary", SUMMARY_STR);
-		input.put("rr_dtstamp", DTSTAMP_STR);
-		input.put("rr_uid", UID_STR);
-		input.put("rr_seq", SEQ);
-		input.put("rr_data", DATA_STR);
+		input.put("rr_e_id", EV_ID);
 		return input;
 	}
 
@@ -61,13 +57,8 @@ public class MeqResourceReservationsTest {
 		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
 		assertEquals(ID, c.getId());
 		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
+		assertEquals(INTERVAL_STR, c.getInterval());
+		assertEquals(EV_ID, c.getEventId());
 	}
 
 	@Test
@@ -77,13 +68,8 @@ public class MeqResourceReservationsTest {
 		input.remove("rr_id");
 		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
 		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
+		assertEquals(INTERVAL_STR, c.getInterval());
+		assertEquals(EV_ID, c.getEventId());
 	}
 
 	@Test
@@ -93,13 +79,8 @@ public class MeqResourceReservationsTest {
 		input.remove("rr_r_id");
 		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
 		assertEquals(ID, c.getId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
+		assertEquals(INTERVAL_STR, c.getInterval());
+		assertEquals(EV_ID, c.getEventId());
 	}
 
 	@Test
@@ -110,108 +91,18 @@ public class MeqResourceReservationsTest {
 		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
 		assertEquals(ID, c.getId());
 		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
+		assertEquals(EV_ID, c.getEventId());
 	}
 
 	@Test
-	public void testBuildFromMapMissingOrganiser() {
+	public void testBuildFromMapMissingEventId() {
 
 		Map<String, Object> input = prepareInput();
-		input.remove("rr_organiser");
+		input.remove("rr_e_id");
 		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
 		assertEquals(ID, c.getId());
 		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
-	}
-
-	@Test
-	public void testBuildFromMapMissingSummary() {
-
-		Map<String, Object> input = prepareInput();
-		input.remove("rr_summary");
-		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
-		assertEquals(ID, c.getId());
-		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
-	}
-
-	@Test
-	public void testBuildFromMapMissingDtStamp() {
-
-		Map<String, Object> input = prepareInput();
-		input.remove("rr_dtstamp");
-		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
-		assertEquals(ID, c.getId());
-		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
-	}
-
-	@Test
-	public void testBuildFromMapMissingUid() {
-
-		Map<String, Object> input = prepareInput();
-		input.remove("rr_uid");
-		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
-		assertEquals(ID, c.getId());
-		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(SEQ, c.getSeq());
-		assertEquals(DATA_STR, c.getData());
-	}
-
-	@Test
-	public void testBuildFromMapMissingSeq() {
-
-		Map<String, Object> input = prepareInput();
-		input.remove("rr_seq");
-		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
-		assertEquals(ID, c.getId());
-		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(DATA_STR, c.getData());
-	}
-
-	@Test
-	public void testBuildFromMapMissingData() {
-
-		Map<String, Object> input = prepareInput();
-		input.remove("rr_data");
-		MeqResourceReservations c = MeqResourceReservations.buildFromMap(input);
-		assertEquals(ID, c.getId());
-		assertEquals(RES_ID, c.getResourceId());
-		assertEquals(interval, c.getInterval());
-		assertEquals(ORGANISER_STR, c.getOrganiser());
-		assertEquals(SUMMARY_STR, c.getSummary());
-		assertEquals(dtstamp, c.getDateTimestamp());
-		assertEquals(UID_STR, c.getUid());
-		assertEquals(SEQ, c.getSeq());
+		assertEquals(INTERVAL_STR, c.getInterval());
 	}
 
 	@Test
@@ -257,63 +148,11 @@ public class MeqResourceReservationsTest {
 	}
 
 	@Test
-	public void testEqualsDiffOrganiser() {
+	public void testEqualsDiffEventId() {
 
 		Map<String, Object> input = prepareInput();
 		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);
-		input.put("rr_organiser", ORGANISER_STR + ".com");
-		MeqResourceReservations c2 = MeqResourceReservations.buildFromMap(input);
-		assertNotEquals(c1, c2);
-	}
-
-	@Test
-	public void testEqualsDiffSummary() {
-
-		Map<String, Object> input = prepareInput();
-		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);
-		input.put("rr_summary", SUMMARY_STR + "-test");
-		MeqResourceReservations c2 = MeqResourceReservations.buildFromMap(input);
-		assertNotEquals(c1, c2);
-	}
-
-	@Test
-	public void testEqualsDiffDtStamp() {
-
-		Map<String, Object> input = prepareInput();
-		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis(0);
-		input.put("rr_dtstamp", c);
-		MeqResourceReservations c2 = MeqResourceReservations.buildFromMap(input);
-		assertNotEquals(c1, c2);
-	}
-
-	@Test
-	public void testEqualsDiffUid() {
-
-		Map<String, Object> input = prepareInput();
-		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);
-		input.put("rr_uid", UID_STR + "-test");
-		MeqResourceReservations c2 = MeqResourceReservations.buildFromMap(input);
-		assertNotEquals(c1, c2);
-	}
-
-	@Test
-	public void testEqualsDiffSeq() {
-
-		Map<String, Object> input = prepareInput();
-		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);
-		input.put("rr_seq", SEQ + 1);
-		MeqResourceReservations c2 = MeqResourceReservations.buildFromMap(input);
-		assertNotEquals(c1, c2);
-	}
-
-	@Test
-	public void testEqualsDiffData() {
-
-		Map<String, Object> input = prepareInput();
-		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);
-		input.put("rr_data", DATA_STR + "-test");
+		input.put("rr_e_id", EV_ID + 3L);
 		MeqResourceReservations c2 = MeqResourceReservations.buildFromMap(input);
 		assertNotEquals(c1, c2);
 	}
@@ -337,11 +176,7 @@ public class MeqResourceReservationsTest {
 		c = MeqResourceReservations.buildFromMap(input);
 		assertNotNull(c.toString());
 		assertTrue(c.toString().contains(ID.toString()));
+		assertTrue(c.toString().contains(EV_ID.toString()));
 		assertTrue(c.toString().contains(RES_ID.toString()));
-		assertTrue(c.toString().contains(ORGANISER_STR));
-		assertTrue(c.toString().contains(SUMMARY_STR));
-		assertTrue(c.toString().contains(UID_STR));
-		assertTrue(c.toString().contains(SEQ.toString()));
-		assertTrue(c.toString().contains(DATA_STR));
 	}
 }

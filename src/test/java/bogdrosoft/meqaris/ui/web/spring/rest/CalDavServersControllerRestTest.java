@@ -22,10 +22,12 @@
 
 package bogdrosoft.meqaris.ui.web.spring.rest;
 
-import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +35,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
+import bogdrosoft.meqaris.ui.web.spring.db.MeqCalDavServers;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ConfigControllerRestTest {
+public class CalDavServersControllerRestTest {
 
 	@LocalServerPort
 	private int port;
@@ -45,64 +50,35 @@ public class ConfigControllerRestTest {
 	@Autowired
 	private TestRestTemplate cc;
 
-	private List<Map<String, Object>> getConfigsFor(String file) {
+	@Test
+	public void testFullList() throws Exception {
 
+		String dir = TestHelper.getFullPathFor("good.ini");
 		@SuppressWarnings("unchecked")
-		List<Map<String, Object>> cfgs = cc.getForObject(
-				"http://localhost:" + port + "/config?file=" + file, List.class);
-		return cfgs;
-	}
-
-	private boolean findConfigValue(List<Map<String, Object>> cfgs, String name) {
-
-		int size = cfgs.size();
-		for (int i = 0; i < size; i++) {
-
-			Map<String, Object> row = cfgs.get(i);
-			if (name.equals(row.get("name"))) {
-				return true;
-			}
-		}
-		return false;
+		List<MeqCalDavServers> r = cc.getForObject(
+				"http://localhost:" + port + "/caldav_servers?file=" + dir, List.class);
+		assertNotNull(r);
 	}
 
 	@Test
-	public void testFullConfig() throws Exception {
+	public void testFirst() throws Exception {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
-		List<Map<String, Object>> cfgs = getConfigsFor(dir);
-		if (! findConfigValue (cfgs, "db_version")) {
-			fail("The required configuration 'db_version' not found");
-		}
+		// this is just to potentially get more coverage
+		ResponseEntity<MeqCalDavServers> r = cc.getForEntity(
+				new URI("http://localhost:" + port + "/caldav_server/1?file=" + dir),
+				MeqCalDavServers.class);
+		assertNotNull(r);
 	}
 
 	@Test
-	public void testVersion() throws Exception {
+	public void testMissing() throws Exception {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
-		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=db_version");
-		if (! findConfigValue (cfgs, "db_version")) {
-			fail("The required configuration 'db_version' not found");
-		}
-	}
-
-	@Test
-	public void testMailServer() throws Exception {
-
-		String dir = TestHelper.getFullPathFor("good.ini");
-		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=mail_server");
-		if (! findConfigValue (cfgs, "mail_server")) {
-			fail("The required configuration 'mail_server' not found");
-		}
-	}
-
-	@Test
-	public void testUnknown() throws Exception {
-
-		String dir = TestHelper.getFullPathFor("good.ini");
-		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=blah");
-		if (findConfigValue (cfgs, "blah")) {
-			fail("The configuration 'blah' found, but shouldn't be");
-		}
+		ResponseEntity<MeqCalDavServers> r = cc.getForEntity(
+				new URI("http://localhost:" + port + "/caldav_server/-1?file=" + dir),
+				MeqCalDavServers.class);
+		assertEquals(HttpStatus.NOT_FOUND, r.getStatusCode());
+		assertNull(r.getBody());
 	}
 }

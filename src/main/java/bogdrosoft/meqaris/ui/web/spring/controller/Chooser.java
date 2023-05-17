@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+ * Copyright (C) 2022-2023 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
  *
  * This file is part of Meqaris (Meeting Equipment and Room Invitation System),
  *  software that allows booking meeting rooms and other resources using
@@ -47,6 +47,21 @@ public class Chooser {
 	public static final String FORM_PARAM_NAME_RESERVATIONS = "meq_res_reserv";
 
 	/**
+	 * The name of the "events" data to get.
+	 */
+	public static final String FORM_PARAM_NAME_EVENTS = "meq_ev";
+
+	/**
+	 * The name of the "CalDAV servers" data to get.
+	 */
+	public static final String FORM_PARAM_NAME_CALDAV_SERVERS = "meq_caldav_srv";
+
+	/**
+	 * The name of the "CalDAV server resources" data to get.
+	 */
+	public static final String FORM_PARAM_NAME_CALDAV_SERVERS_RES = "meq_caldav_srv_rsrc";
+
+	/**
 	 * The name of the bean that holds the configuration data.
 	 */
 	public static final String ATTR_CONFIG = "meq_cfg";
@@ -60,6 +75,21 @@ public class Chooser {
 	 * The name of the bean that holds the resource reservation data.
 	 */
 	public static final String ATTR_RES_RESERV = "meq_resources_reserv";
+
+	/**
+	 * The name of the bean that holds the event data.
+	 */
+	public static final String ATTR_EVENTS = "meq_events";
+
+	/**
+	 * The name of the bean that holds the CalDAV server data.
+	 */
+	public static final String ATTR_CALDAV_SERVERS = "meq_caldav_servers";
+
+	/**
+	 * The name of the bean that holds the CalDAV server resources data.
+	 */
+	public static final String ATTR_CALDAV_SERVERS_RES = "meq_caldav_servers_resources";
 
 	/**
 	 * The default name of the configuration file.

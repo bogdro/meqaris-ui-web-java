@@ -28,51 +28,38 @@ import java.util.Objects;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "meq_config")
+@Table(name = "meq_caldav_servers_resources")
 @Cacheable(false)
-public class MeqConfig {
+public class MeqCalDavServersResources {
 
-	@Id
-	@Column(name = "c_name", unique = true, nullable = false, insertable = false, updatable = false)
-	private String name;
+	@Column(name = "calres_cals_id", nullable = false, insertable = false, updatable = false)
+	private Long serverId;
 
-	@Column(name = "c_value", insertable = false, updatable = false)
-	private String value;
+	@Column(name = "calres_r_id", nullable = false, insertable = false, updatable = false)
+	private Long resourceId;
 
-	@Column(name = "c_description", insertable = false, updatable = false)
-	private String description;
-
-	public String getName() {
-		return name;
+	public Long getServerId() {
+		return serverId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setServerId(Long serverId) {
+		this.serverId = serverId;
 	}
 
-	public String getValue() {
-		return value;
+	public Long getResourceId() {
+		return resourceId;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, name, value);
+		return Objects.hash(resourceId, serverId);
 	}
 
 	@Override
@@ -80,35 +67,30 @@ public class MeqConfig {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof MeqConfig)) {
+		if (!(obj instanceof MeqCalDavServersResources)) {
 			return false;
 		}
-		MeqConfig other = (MeqConfig) obj;
-		return Objects.equals(description, other.description) && Objects.equals(name, other.name)
-				&& Objects.equals(value, other.value);
+		MeqCalDavServersResources other = (MeqCalDavServersResources) obj;
+		return Objects.equals(resourceId, other.resourceId) && Objects.equals(serverId, other.serverId);
 	}
 
 	@Override
 	public String toString() {
-		return "MeqConfig [name=" + name + ", value=" + value + ", description=" + description + "]";
+		return "MeqCalDavServersResources [serverId=" + serverId + ", resourceId=" + resourceId + "]";
 	}
 
-	public static MeqConfig buildFromMap(Map<String, Object> m) {
-		MeqConfig c = new MeqConfig();
+	public static MeqCalDavServersResources buildFromMap(Map<String, Object> m) {
+		MeqCalDavServersResources serverResMap = new MeqCalDavServersResources();
 		if (m != null) {
-			Object name = m.get("c_name");
-			if (name != null) {
-				c.setName(String.valueOf(name));
+			Object calsId = m.get("calres_cals_id");
+			if (calsId != null) {
+				serverResMap.setServerId(Long.valueOf(String.valueOf(calsId)));
 			}
-			Object value = m.get("c_value");
-			if (value != null) {
-				c.setValue(String.valueOf(value));
-			}
-			Object desc = m.get("c_description");
-			if (desc != null) {
-				c.setDescription(String.valueOf(desc));
+			Object resId = m.get("calres_r_id");
+			if (resId != null) {
+				serverResMap.setResourceId(Long.valueOf(String.valueOf(resId)));
 			}
 		}
-		return c;
+		return serverResMap;
 	}
 }

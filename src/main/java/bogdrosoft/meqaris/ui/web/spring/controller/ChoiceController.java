@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
+ * Copyright (C) 2022-2023 Bogdan 'bogdro' Drozdowski, bogdro (at) users . sourceforge . net
  *
  * This file is part of Meqaris (Meeting Equipment and Room Invitation System),
  *  software that allows booking meeting rooms and other resources using
@@ -78,15 +78,39 @@ public class ChoiceController {
 			List<Map<String, Object>> res = db.getConfig();
 			model.addAttribute(Chooser.ATTR_CONFIG, res);
 
-		} else if (Chooser.FORM_PARAM_NAME_RESOURCES.equals(cfgName)) {
+		}
+		if (Chooser.FORM_PARAM_NAME_RESOURCES.equals(cfgName)
+				|| Chooser.FORM_PARAM_NAME_RESERVATIONS.equals(cfgName)
+				|| Chooser.FORM_PARAM_NAME_CALDAV_SERVERS_RES.equals(cfgName)) {
 		
 			List<Map<String, Object>> res = db.getResources();
 			model.addAttribute(Chooser.ATTR_RES, res);
 
-		} else if (Chooser.FORM_PARAM_NAME_RESERVATIONS.equals(cfgName)) {
+		}
+		if (Chooser.FORM_PARAM_NAME_RESERVATIONS.equals(cfgName)) {
 
 			List<Map<String, Object>> res = db.getResourceReservations();
 			model.addAttribute(Chooser.ATTR_RES_RESERV, res);
+
+		}
+		if (Chooser.FORM_PARAM_NAME_EVENTS.equals(cfgName)
+				|| Chooser.FORM_PARAM_NAME_RESERVATIONS.equals(cfgName)) {
+
+			List<Map<String, Object>> res = db.getEvents();
+			model.addAttribute(Chooser.ATTR_EVENTS, res);
+
+		}
+		if (Chooser.FORM_PARAM_NAME_CALDAV_SERVERS.equals(cfgName)
+				|| Chooser.FORM_PARAM_NAME_CALDAV_SERVERS_RES.equals(cfgName)) {
+
+			List<Map<String, Object>> res = db.getCalDavServers();
+			model.addAttribute(Chooser.ATTR_CALDAV_SERVERS, res);
+
+		}
+		if (Chooser.FORM_PARAM_NAME_CALDAV_SERVERS_RES.equals(cfgName)) {
+
+			List<Map<String, Object>> res = db.getCalDavServersResources();
+			model.addAttribute(Chooser.ATTR_CALDAV_SERVERS_RES, res);
 		}
 		return CHOICE_VIEW_NAME;
 	}
@@ -101,7 +125,7 @@ public class ChoiceController {
 	@PostMapping("/" + CHOICE_VIEW_NAME)
 	public String choicePagePost(
 			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) @Valid Chooser c,
-			BindingResult res,	// NOTE: this MUST be the second parameter in the method!
+			BindingResult res,	// NOTE: this MUST be the next parameter after the Chooser!
 			Model model
 		) throws Exception {
 

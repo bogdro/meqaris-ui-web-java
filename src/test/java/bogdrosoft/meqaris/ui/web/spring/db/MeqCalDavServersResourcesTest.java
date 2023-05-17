@@ -32,18 +32,16 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class MeqConfigTest {
+public class MeqCalDavServersResourcesTest {
 
-	private static final String NAME_STR = "nnnnn";
-	private static final String VALUE_STR = "vvvvv";
-	private static final String DESC_STR = "ddddd";
+	private static final Long SERVER_ID = Long.valueOf(1234L);
+	private static final Long RES_ID = Long.valueOf(2345L);
 
 	private Map<String, Object> prepareInput() {
 
 		Map<String, Object> input = new HashMap<String, Object>();
-		input.put("c_name", NAME_STR);
-		input.put("c_value", VALUE_STR);
-		input.put("c_description", DESC_STR);
+		input.put("calres_cals_id", SERVER_ID);
+		input.put("calres_r_id", RES_ID);
 		return input;
 	}
 
@@ -51,80 +49,57 @@ public class MeqConfigTest {
 	public void testBuildFromMap() {
 
 		Map<String, Object> input = prepareInput();
-		MeqConfig c = MeqConfig.buildFromMap(input);
-		assertEquals(NAME_STR, c.getName());
-		assertEquals(VALUE_STR, c.getValue());
-		assertEquals(DESC_STR, c.getDescription());
+		MeqCalDavServersResources c = MeqCalDavServersResources.buildFromMap(input);
+		assertEquals(SERVER_ID, c.getServerId());
+		assertEquals(RES_ID, c.getResourceId());
 	}
 
 	@Test
-	public void testBuildFromMapMissingName() {
+	public void testBuildFromMapMissingServerId() {
 
 		Map<String, Object> input = prepareInput();
-		input.remove("c_name");
-		MeqConfig c = MeqConfig.buildFromMap(input);
-		assertEquals(VALUE_STR, c.getValue());
-		assertEquals(DESC_STR, c.getDescription());
+		input.remove("calres_cals_id");
+		MeqCalDavServersResources c = MeqCalDavServersResources.buildFromMap(input);
+		assertEquals(RES_ID, c.getResourceId());
 	}
 
 	@Test
-	public void testBuildFromMapMissingValue() {
+	public void testBuildFromMapMissingResourceId() {
 
 		Map<String, Object> input = prepareInput();
-		input.remove("c_value");
-		MeqConfig c = MeqConfig.buildFromMap(input);
-		assertEquals(NAME_STR, c.getName());
-		assertEquals(DESC_STR, c.getDescription());
-	}
-
-	@Test
-	public void testBuildFromMapMissingDesc() {
-
-		Map<String, Object> input = prepareInput();
-		input.remove("c_description");
-		MeqConfig c = MeqConfig.buildFromMap(input);
-		assertEquals(NAME_STR, c.getName());
-		assertEquals(VALUE_STR, c.getValue());
+		input.remove("calres_r_id");
+		MeqCalDavServersResources c = MeqCalDavServersResources.buildFromMap(input);
+		assertEquals(SERVER_ID, c.getServerId());
 	}
 
 	@Test
 	public void testEquals() {
 
 		Map<String, Object> input = prepareInput();
-		MeqConfig c1 = MeqConfig.buildFromMap(input);
-		MeqConfig c2 = MeqConfig.buildFromMap(input);
+		MeqCalDavServersResources c1 = MeqCalDavServersResources.buildFromMap(input);
+		MeqCalDavServersResources c2 = MeqCalDavServersResources.buildFromMap(input);
 		assertEquals(c1, c1);
 		assertEquals(c1, c2);
 		assertNotEquals(c1, "c1");
 	}
 
 	@Test
-	public void testEqualsDiffName() {
+	public void testEqualsDiffServerId() {
 
 		Map<String, Object> input = prepareInput();
-		MeqConfig c1 = MeqConfig.buildFromMap(input);
-		input.put("c_name", NAME_STR + "2");
-		MeqConfig c2 = MeqConfig.buildFromMap(input);
+		MeqCalDavServersResources c1 = MeqCalDavServersResources.buildFromMap(input);
+		input.put("calres_cals_id", SERVER_ID + 1L);
+		MeqCalDavServersResources c2 = MeqCalDavServersResources.buildFromMap(input);
 		assertNotEquals(c1, c2);
 	}
 
 	@Test
-	public void testEqualsDiffValue() {
+	public void testEqualsDiffResourceId() {
 
 		Map<String, Object> input = prepareInput();
-		MeqConfig c1 = MeqConfig.buildFromMap(input);
-		input.put("c_value", VALUE_STR + "2");
-		MeqConfig c2 = MeqConfig.buildFromMap(input);
-		assertNotEquals(c1, c2);
-	}
-
-	@Test
-	public void testEqualsDiffDesc() {
-
-		Map<String, Object> input = prepareInput();
-		MeqConfig c1 = MeqConfig.buildFromMap(input);
-		input.put("c_description", DESC_STR + "2");
-		MeqConfig c2 = MeqConfig.buildFromMap(input);
+		MeqCalDavServersResources c1 = MeqCalDavServersResources.buildFromMap(input);
+		input.put("calres_r_id", RES_ID + 1L);
+		MeqCalDavServersResources c2 = MeqCalDavServersResources.buildFromMap(input);
 		assertNotEquals(c1, c2);
 	}
 
@@ -132,22 +107,21 @@ public class MeqConfigTest {
 	public void testHashcode() {
 
 		Map<String, Object> input = prepareInput();
-		MeqConfig c1 = MeqConfig.buildFromMap(input);
-		MeqConfig c2 = MeqConfig.buildFromMap(input);
+		MeqCalDavServersResources c1 = MeqCalDavServersResources.buildFromMap(input);
+		MeqCalDavServersResources c2 = MeqCalDavServersResources.buildFromMap(input);
 		assertEquals(c1.hashCode(), c2.hashCode());
 	}
 
 	@Test
 	public void testToString() {
 
-		MeqConfig c = MeqConfig.buildFromMap(null);
+		MeqCalDavServersResources c = MeqCalDavServersResources.buildFromMap(null);
 		assertNotNull(c.toString());
 
 		Map<String, Object> input = prepareInput();
-		c = MeqConfig.buildFromMap(input);
+		c = MeqCalDavServersResources.buildFromMap(input);
 		assertNotNull(c.toString());
-		assertTrue(c.toString().contains(NAME_STR));
-		assertTrue(c.toString().contains(VALUE_STR));
-		assertTrue(c.toString().contains(DESC_STR));
+		assertTrue(c.toString().contains(SERVER_ID.toString()));
+		assertTrue(c.toString().contains(RES_ID.toString()));
 	}
 }
