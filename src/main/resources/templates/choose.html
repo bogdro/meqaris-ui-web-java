@@ -58,18 +58,19 @@ Choose what to display:
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_RESOURCES)).build()}"
 		hreflang="en">Resources</a></li>
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_RESERVATIONS)).build()}"
-		hreflang="en">Resource reservations</a></li>
+		hreflang="en">Resource reservations (and events with resources)</a></li>
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_EVENTS)).build()}"
 		hreflang="en">Events</a></li>
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_CALDAV_SERVERS)).build()}"
 		hreflang="en">CalDAV servers</a></li>
 	<li><a th:href="${(#mvc.url('CC#choicePageGet').arg(0,chooser.FORM_PARAM_NAME_CALDAV_SERVERS_RES)).build()}"
-		hreflang="en">CalDAV server-to-resource assignments</a></li>
+		hreflang="en">CalDAV server-to-resource assignments (with CalDAV servers and resources)</a></li>
 </ul>
 <p>
 <a th:href="${(#mvc.url('IC#indexPage')).build()}" hreflang="en">Back to file selection</a>
 </p>
 <div th:unless="${#lists.isEmpty(__${chooser.ATTR_CONFIG}__)}">
+	<hr />
 	<table>
 		<caption>Configuration</caption>
 		<thead>
@@ -88,7 +89,46 @@ Choose what to display:
 		</tbody>
 	</table>
 </div>
+<div th:unless="${#lists.isEmpty(__${chooser.ATTR_RES_RESERV}__)}">
+	<hr />
+	<table>
+		<caption>Resource reservations</caption>
+		<thead>
+			<tr>
+				<th>Resource ID</th>
+				<th>Time interval</th>
+				<th>Event ID</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="rr : ${__${chooser.ATTR_RES_RESERV}__}">
+				<td th:text="${rr.rr_r_id}"></td>
+				<td th:text="${rr.rr_interval}"></td>
+				<td th:text="${rr.rr_e_id}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div th:unless="${#lists.isEmpty(__${chooser.ATTR_CALDAV_SERVERS_RES}__)}">
+	<hr />
+	<table>
+		<caption>CalDAV server-to-resource assignments</caption>
+		<thead>
+			<tr>
+				<th>Server ID</th>
+				<th>Resource ID</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="csr : ${__${chooser.ATTR_CALDAV_SERVERS_RES}__}">
+				<td th:text="${csr.calres_cals_id}"></td>
+				<td th:text="${csr.calres_r_id}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 <div th:unless="${#lists.isEmpty(__${chooser.ATTR_RES}__)}">
+	<hr />
 	<table>
 		<caption>Bookable resources</caption>
 		<thead>
@@ -111,26 +151,8 @@ Choose what to display:
 		</tbody>
 	</table>
 </div>
-<div th:unless="${#lists.isEmpty(__${chooser.ATTR_RES_RESERV}__)}">
-	<table>
-		<caption>Resource reservations</caption>
-		<thead>
-			<tr>
-				<th>Resource ID</th>
-				<th>Time interval</th>
-				<th>Event ID</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="rr : ${__${chooser.ATTR_RES_RESERV}__}">
-				<td th:text="${rr.rr_r_id}"></td>
-				<td th:text="${rr.rr_interval}"></td>
-				<td th:text="${rr.rr_e_id}"></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
 <div th:unless="${#lists.isEmpty(__${chooser.ATTR_EVENTS}__)}">
+	<hr />
 	<table>
 		<caption>Events</caption>
 		<thead>
@@ -148,6 +170,7 @@ Choose what to display:
 	</table>
 </div>
 <div th:unless="${#lists.isEmpty(__${chooser.ATTR_CALDAV_SERVERS}__)}">
+	<hr />
 	<table>
 		<caption>CalDAV servers</caption>
 		<thead>
@@ -164,23 +187,6 @@ Choose what to display:
 				<td th:text="${srv.cals_url}"></td>
 				<td th:text="${srv.cals_username}"></td>
 				<td th:text="${srv.cals_realm}"></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<div th:unless="${#lists.isEmpty(__${chooser.ATTR_CALDAV_SERVERS_RES}__)}">
-	<table>
-		<caption>CalDAV server-to-resource assignments</caption>
-		<thead>
-			<tr>
-				<th>Server ID</th>
-				<th>Resource ID</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="csr : ${__${chooser.ATTR_CALDAV_SERVERS_RES}__}">
-				<td th:text="${csr.calres_cals_id}"></td>
-				<td th:text="${csr.calres_r_id}"></td>
 			</tr>
 		</tbody>
 	</table>
