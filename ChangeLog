@@ -1,3 +1,43 @@
+2023-05-17	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 1.2:
+	  Added support for CalDAV servers and CalDAV server-to-resource
+	  mapping. Updated resource reservation support with events' view
+	  after database changes. When viewing data, view also related data.
+	  Code quality updates (SonarCloud, Codacy). Other minor changes in
+	  code and tests. Updated documentation and copyright.
+	* MeqResourceReservations.java, MeqResourceReservationsTest.java,
+	  DbManager.java (getResourceReservations, getResourceReservationById),
+	  choose.html: Updated after database changes.
+	* MeqEvents.java, EventsControllerRest.java, MeqEventsTest.java,
+	  EventsControllerRestTest.java, Chooser.java, ChoiceController.java
+	  (choicePageGet), DbManager.java (getEvents, getEventById),
+	  choose.html: Added support for events (meq_events).
+	* MeqCalDavServers.java, CalDavServersControllerRest.java,
+	  MeqCalDavServersTest.java, CalDavServersControllerRestTest.java,
+	  ChoiceController.java (choicePageGet), Chooser.java, DbManager.java
+	  (getCalDavServers, getCalDavServerById), choose.html,
+	  ChoiceControllerTest.java: Add support for CalDAV servers
+	  (meq_caldav_servers).
+	* MeqCalDavServersResources.java, MeqCalDavServersResourcesTest.java,
+	  CalDavServersResourcesControllerRest.java, choose.html, Chooser.java,
+	  CalDavServersResourcesControllerRestTest.java, DbManager.java
+	  (getCalDavServersResources, getCalDavServerResourcesByServerId),
+	  ChoiceController.java (choicePageGet), ChoiceControllerTest.java:
+	  Add support for CalDAV server-to-resource mapping
+	  (meq_caldav_servers_resources).
+	* ChoiceController.java (choicePageGet), choose.html: View related
+	  data with the queried data: display the resources and events when
+	  displaying reservations and display the CalDAV servers and
+	  resources when displaying CalDAV server-to-resource assignments.
+	* src/main/*: Code quality updates, for SonarCloud and Codacy.
+	* src/test/*: Code quality and coverage updates. Current coverage:
+	  130 tests, src/main: 98.1%, src/test: 98.9%, total: 98.6% (assuming
+	  a database is running and has some data).
+	* Makefile: Get the version number from pom.xml.
+	* *.java, *.html, *.css, pom.xml, Makefile: Updated copyright.
+	* README: Updated description.
+
 2022-12-04	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
 
 	* Meqaris-UI-web-java version 1.0:

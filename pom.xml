@@ -34,7 +34,7 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 	</parent>
 	<groupId>bogdrosoft.meqaris</groupId>
 	<artifactId>meqaris-ui-web-java</artifactId>
-	<version>1.0</version> <!-- MEQ_UI_VERSION -->
+	<version>1.2</version> <!-- MEQ_UI_VERSION -->
 	<name>Meqaris Web UI</name>
 	<description>Meqaris Web UI</description>
 	<properties>
