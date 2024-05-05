@@ -40,6 +40,8 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 	<properties>
 		<java.version>1.8</java.version>
 		<test.rsrc.dir>${project.build.testOutputDirectory}</test.rsrc.dir>
+		<!-- Version numbers: -->
+		<ini4j.version>0.5.4</ini4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -75,7 +77,7 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 		<dependency>
 			<groupId>org.ini4j</groupId>
 			<artifactId>ini4j</artifactId>
-			<version>0.5.4</version>
+			<version>${ini4j.version}</version>
 		</dependency>
 
 		<dependency>
