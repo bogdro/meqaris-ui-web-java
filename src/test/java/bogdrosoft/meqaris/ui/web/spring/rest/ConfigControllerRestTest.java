@@ -22,7 +22,8 @@
 
 package bogdrosoft.meqaris.ui.web.spring.rest;
 
-import static org.assertj.core.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class ConfigControllerRestTest {
 		return cfgs;
 	}
 
-	private boolean findConfigValue(List<Map<String, Object>> cfgs, String name) {
+	private static boolean findConfigValue(List<Map<String, Object>> cfgs, String name) {
 
 		int size = cfgs.size();
 		for (int i = 0; i < size; i++) {
@@ -71,9 +72,7 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir);
-		if (! findConfigValue (cfgs, "db_version")) {
-			fail("The required configuration 'db_version' not found");
-		}
+		assertTrue(findConfigValue(cfgs, "db_version"), "The required configuration value 'db_version' not found");
 	}
 
 	@Test
@@ -81,9 +80,7 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=db_version");
-		if (! findConfigValue (cfgs, "db_version")) {
-			fail("The required configuration 'db_version' not found");
-		}
+		assertTrue(findConfigValue(cfgs, "db_version"), "The required configuration value 'db_version' not found");
 	}
 
 	@Test
@@ -91,9 +88,7 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=mail_server");
-		if (! findConfigValue (cfgs, "mail_server")) {
-			fail("The required configuration 'mail_server' not found");
-		}
+		assertTrue(findConfigValue(cfgs, "mail_server"), "The required configuration value 'mail_server' not found");
 	}
 
 	@Test
@@ -101,8 +96,6 @@ public class ConfigControllerRestTest {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=blah");
-		if (findConfigValue (cfgs, "blah")) {
-			fail("The configuration 'blah' found, but shouldn't be");
-		}
+		assertFalse(findConfigValue(cfgs, "blah"), "The configuration value 'blah' found, but shouldn't be");
 	}
 }
