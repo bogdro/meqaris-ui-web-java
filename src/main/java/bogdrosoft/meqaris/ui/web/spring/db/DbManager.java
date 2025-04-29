@@ -65,7 +65,7 @@ public class DbManager {
 		ds.setConnectTimeout(Integer.parseInt(dbSection.get("connect_timeout", "30")));
 		/*ds.setUrl("jdbc:postgresql://" + dbSection.get("host")
 			+ ":" + dbSection.get("port") + "/meqaris");*/
-		jdbc = new JdbcTemplate(ds);		
+		jdbc = new JdbcTemplate(ds);
 	}
 
 	public List<Map<String, Object>> getConfig() {

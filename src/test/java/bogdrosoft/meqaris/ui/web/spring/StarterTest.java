@@ -35,7 +35,7 @@ public class StarterTest {
 	private Starter starter;
 
 	@Test
-	public void contextLoads() throws Exception {
+	public void contextLoads() {
 		assertThat(starter).isNotNull();
 	}
 }

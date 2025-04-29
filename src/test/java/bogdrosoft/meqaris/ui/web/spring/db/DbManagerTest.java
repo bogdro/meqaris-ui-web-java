@@ -34,19 +34,19 @@ import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 public class DbManagerTest {
 
 	@Test
-	public void testNullFile() throws Exception {
+	public void testNullFile() {
 
 		assertThrows(Exception.class, new DbTestExecutable(null));
 	}
 
 	@Test
-	public void testFileNotFound() throws Exception {
+	public void testFileNotFound() {
 
 		assertThrows(Exception.class, new DbTestExecutable("/blah"));
 	}
 
 	@Test
-	public void testFileCantRead() throws Exception {
+	public void testFileCantRead() {
 
 		final String dir = TestHelper.getFullPathFor("bad-cantread.ini");
 		File f = new File(dir);
@@ -55,7 +55,7 @@ public class DbManagerTest {
 	}
 
 	@Test
-	public void testBadDbType() throws Exception {
+	public void testBadDbType() {
 
 		assertThrows(Exception.class,
 				new DbTestExecutable(TestHelper.getFullPathFor("bad-dbtype.ini")));

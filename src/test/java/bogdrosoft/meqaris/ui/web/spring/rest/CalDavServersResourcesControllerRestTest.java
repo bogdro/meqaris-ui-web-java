@@ -51,7 +51,7 @@ public class CalDavServersResourcesControllerRestTest {
 	private TestRestTemplate cc;
 
 	@Test
-	public void testFullList() throws Exception {
+	public void testFullList() {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		@SuppressWarnings("unchecked")

@@ -68,7 +68,7 @@ public class ConfigControllerRestTest {
 	}
 
 	@Test
-	public void testFullConfig() throws Exception {
+	public void testFullConfig() {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir);
@@ -76,7 +76,7 @@ public class ConfigControllerRestTest {
 	}
 
 	@Test
-	public void testVersion() throws Exception {
+	public void testVersion() {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=db_version");
@@ -84,7 +84,7 @@ public class ConfigControllerRestTest {
 	}
 
 	@Test
-	public void testMailServer() throws Exception {
+	public void testMailServer() {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=mail_server");
@@ -92,7 +92,7 @@ public class ConfigControllerRestTest {
 	}
 
 	@Test
-	public void testUnknown() throws Exception {
+	public void testUnknown() {
 
 		String dir = TestHelper.getFullPathFor("good.ini");
 		List<Map<String, Object>> cfgs = getConfigsFor(dir + "&name=blah");
