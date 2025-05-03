@@ -39,6 +39,10 @@ import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.Status;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
+/**
+ * A test for the ReST controller for the "/status" URL.
+ * @author Bogdan Drozdowski
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class StatusControllerRestTest extends BaseIntegrationTest {
 

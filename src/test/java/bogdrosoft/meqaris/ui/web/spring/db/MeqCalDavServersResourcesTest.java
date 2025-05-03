@@ -32,6 +32,10 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * A test for the entity class for the "meq_caldav_servers_resources" table.
+ * @author Bogdan Drozdowski
+ */
 public class MeqCalDavServersResourcesTest {
 
 	private static final Long SERVER_ID = Long.valueOf(1234L);

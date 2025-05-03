@@ -42,6 +42,10 @@ import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqCalDavServersResources;
 
+/**
+ * A test for the ReST controller for the "/caldav_servers_res" URL.
+ * @author Bogdan Drozdowski
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CalDavServersResourcesControllerRestTest extends BaseIntegrationTest {
 

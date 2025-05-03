@@ -26,6 +26,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.URL;
 
+/**
+ * A helper class for test classes.
+ * @author Bogdan Drozdowski
+ */
 public class TestHelper {
 
 	public static String getFullPathFor(String file) {

@@ -33,6 +33,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * A test for the Spring controller for the root/index page.
+ * @author Bogdan Drozdowski
+ */
 @WebMvcTest
 public class IndexControllerTest {
 

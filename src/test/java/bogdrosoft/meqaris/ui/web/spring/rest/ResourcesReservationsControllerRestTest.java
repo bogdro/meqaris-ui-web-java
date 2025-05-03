@@ -43,6 +43,10 @@ import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqResourceReservations;
 
+/**
+ * A test for the ReST controller for the "/reservation(s)" URLs.
+ * @author Bogdan Drozdowski
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ResourcesReservationsControllerRestTest extends BaseIntegrationTest {
 

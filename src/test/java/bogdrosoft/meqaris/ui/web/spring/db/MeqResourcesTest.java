@@ -29,6 +29,10 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * A test for the entity class for the "meq_resources" table.
+ * @author Bogdan Drozdowski
+ */
 public class MeqResourcesTest {
 
 	private static final Long ID = Long.valueOf(11111L);

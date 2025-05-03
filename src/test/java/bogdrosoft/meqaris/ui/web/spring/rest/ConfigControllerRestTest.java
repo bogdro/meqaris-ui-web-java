@@ -38,6 +38,10 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
+/**
+ * A test for the ReST controller for the "/config" URL.
+ * @author Bogdan Drozdowski
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ConfigControllerRestTest extends BaseIntegrationTest {
 

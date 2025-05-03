@@ -32,6 +32,10 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * A test for the entity class for the "meq_config" table.
+ * @author Bogdan Drozdowski
+ */
 public class MeqConfigTest {
 
 	private static final String NAME_STR = "nnnnn";

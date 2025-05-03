@@ -35,6 +35,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * A test for the Spring controller for the /error page.
+ * @author Bogdan Drozdowski
+ */
 @WebMvcTest
 public class MeqErrorControllerTest {
 

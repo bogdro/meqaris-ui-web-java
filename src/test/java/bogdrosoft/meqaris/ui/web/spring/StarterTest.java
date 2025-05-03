@@ -28,6 +28,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * A test for the Spring boot/startup class.
+ * @author Bogdan Drozdowski
+ */
 @SpringBootTest
 public class StarterTest {
 

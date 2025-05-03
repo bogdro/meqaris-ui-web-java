@@ -26,6 +26,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * A test for the class to represent the status of the Meqaris configuration.
+ * @author Bogdan Drozdowski
+ */
 public class StatusTest {
 
 	@Test

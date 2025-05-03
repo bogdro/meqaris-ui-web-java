@@ -35,6 +35,10 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+/**
+ * A test for the entity class for the "meq_events" table.
+ * @author Bogdan Drozdowski
+ */
 public class MeqEventsTest {
 
 	private static final Long ID = Long.valueOf(55L);

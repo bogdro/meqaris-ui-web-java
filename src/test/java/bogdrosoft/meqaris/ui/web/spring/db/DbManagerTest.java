@@ -31,6 +31,10 @@ import org.junit.jupiter.api.function.Executable;
 
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
+/**
+ * A test for the database access class.
+ * @author Bogdan Drozdowski
+ */
 public class DbManagerTest {
 
 	@Test

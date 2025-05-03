@@ -37,6 +37,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
+/**
+ * A test for the Spring controller for the /choose page.
+ * @author Bogdan Drozdowski
+ */
 @WebMvcTest
 public class ChoiceControllerTest extends BaseIntegrationTest {
 
