@@ -38,6 +38,10 @@ import bogdrosoft.meqaris.ui.web.spring.controller.Chooser;
 import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqCalDavServersResources;
 
+/**
+ * A ReST controller for the "/caldav_servers_res" URL.
+ * @author Bogdan Drozdowski
+ */
 @RestController
 public class CalDavServersResourcesControllerRest {
 

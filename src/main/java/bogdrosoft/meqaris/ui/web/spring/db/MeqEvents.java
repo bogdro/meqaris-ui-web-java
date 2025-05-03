@@ -37,6 +37,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * The entity class for the "meq_events" table.
+ * @author Bogdan Drozdowski
+ */
 @Entity
 @Table(name = "meq_events")
 @Cacheable(false)

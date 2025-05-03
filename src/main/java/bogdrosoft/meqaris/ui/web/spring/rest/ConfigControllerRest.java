@@ -34,6 +34,10 @@ import bogdrosoft.meqaris.ui.web.spring.controller.Chooser;
 import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqConfig;
 
+/**
+ * A ReST controller for the "/config" URL.
+ * @author Bogdan Drozdowski
+ */
 @RestController
 public class ConfigControllerRest {
 

@@ -31,6 +31,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * The entity class for the "meq_config" table.
+ * @author Bogdan Drozdowski
+ */
 @Entity
 @Table(name = "meq_config")
 @Cacheable(false)

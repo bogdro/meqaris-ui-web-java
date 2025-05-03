@@ -29,6 +29,10 @@ import org.springframework.web.bind.annotation.RestController;
 import bogdrosoft.meqaris.ui.web.spring.Status;
 import bogdrosoft.meqaris.ui.web.spring.controller.Chooser;
 
+/**
+ * A ReST controller for the "/status" URL.
+ * @author Bogdan Drozdowski
+ */
 @RestController
 public class StatusControllerRest {
 

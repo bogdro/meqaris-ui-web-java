@@ -32,6 +32,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * The entity class for the "meq_caldav_servers" table.
+ * @author Bogdan Drozdowski
+ */
 @Entity
 @Table(name = "meq_caldav_servers")
 @Cacheable(false)

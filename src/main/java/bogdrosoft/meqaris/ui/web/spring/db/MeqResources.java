@@ -32,6 +32,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * The entity class for the "meq_resources" table.
+ * @author Bogdan Drozdowski
+ */
 @Entity
 @Table(name = "meq_resources")
 @Cacheable(false)

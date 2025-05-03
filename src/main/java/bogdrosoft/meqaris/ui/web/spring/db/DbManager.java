@@ -30,6 +30,10 @@ import org.ini4j.Ini;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * The database access class.
+ * @author Bogdan Drozdowski
+ */
 public class DbManager {
 
 	private JdbcTemplate jdbc;

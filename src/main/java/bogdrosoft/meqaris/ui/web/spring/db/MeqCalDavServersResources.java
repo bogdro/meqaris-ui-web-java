@@ -30,6 +30,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * The entity class for the "meq_caldav_servers_resources" table.
+ * @author Bogdan Drozdowski
+ */
 @Entity
 @Table(name = "meq_caldav_servers_resources")
 @Cacheable(false)

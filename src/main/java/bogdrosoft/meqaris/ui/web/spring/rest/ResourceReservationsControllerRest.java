@@ -38,6 +38,10 @@ import bogdrosoft.meqaris.ui.web.spring.controller.Chooser;
 import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqResourceReservations;
 
+/**
+ * A ReST controller for the "/reservation(s)" URLs.
+ * @author Bogdan Drozdowski
+ */
 @RestController
 public class ResourceReservationsControllerRest {
 
