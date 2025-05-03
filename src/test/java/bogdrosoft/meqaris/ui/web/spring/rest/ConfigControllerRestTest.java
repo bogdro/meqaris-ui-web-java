@@ -35,10 +35,11 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
+import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ConfigControllerRestTest {
+public class ConfigControllerRestTest extends BaseIntegrationTest {
 
 	@LocalServerPort
 	private int port;

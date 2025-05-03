@@ -72,7 +72,20 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 		<test.rsrc.dir>${project.build.testOutputDirectory}</test.rsrc.dir>
 		<!-- Version numbers: -->
 		<ini4j.version>0.5.4</ini4j.version>
+		<testcontainers.version>1.21.0</testcontainers.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>testcontainers-bom</artifactId>
+				<version>${testcontainers.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -120,6 +133,17 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

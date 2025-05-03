@@ -34,10 +34,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
 @WebMvcTest
-public class ChoiceControllerTest {
+public class ChoiceControllerTest extends BaseIntegrationTest {
 
 	@Autowired
 	private MockMvc mvc;

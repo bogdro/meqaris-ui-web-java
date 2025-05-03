@@ -39,11 +39,12 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqResourceReservations;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ResourcesReservationsControllerRestTest {
+public class ResourcesReservationsControllerRestTest extends BaseIntegrationTest {
 
 	@LocalServerPort
 	private int port;

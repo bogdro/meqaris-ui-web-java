@@ -35,11 +35,12 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
+import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
 import bogdrosoft.meqaris.ui.web.spring.Status;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class StatusControllerRestTest {
+public class StatusControllerRestTest extends BaseIntegrationTest {
 
 	@LocalServerPort
 	private int port;
