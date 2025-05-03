@@ -24,6 +24,8 @@ License: GNU AGPL version 3 or newer.
 
 Meqaris homepage: <https://meqaris.sourceforge.io/>
 
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=bogdro_meqaris-ui-web-java)
+
 ## WARNING ##
 
 The `dev` branch may contain code which is a work in progress and committed just for tests. The code here may not work properly or even compile.
