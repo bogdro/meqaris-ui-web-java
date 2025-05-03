@@ -77,4 +77,7 @@ run:
 test:
 	$(MAVEN) clean test
 
+coverage:
+	$(MAVEN) -B clean verify -Pcoverage
+
 .PHONY: all clean dist package run test
