@@ -39,7 +39,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
+import bogdrosoft.meqaris.ui.web.spring.IntegrationTestBase;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqResources;
 
@@ -48,7 +48,7 @@ import bogdrosoft.meqaris.ui.web.spring.db.MeqResources;
  * @author Bogdan Drozdowski
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ResourcesControllerRestTest extends BaseIntegrationTest {
+public class ResourcesControllerRestTest extends IntegrationTestBase {
 
 	@LocalServerPort
 	private int port;

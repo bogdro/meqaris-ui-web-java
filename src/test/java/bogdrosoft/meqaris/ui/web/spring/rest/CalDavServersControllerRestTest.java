@@ -38,7 +38,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import bogdrosoft.meqaris.ui.web.spring.BaseIntegrationTest;
+import bogdrosoft.meqaris.ui.web.spring.IntegrationTestBase;
 import bogdrosoft.meqaris.ui.web.spring.TestHelper;
 import bogdrosoft.meqaris.ui.web.spring.db.MeqCalDavServers;
 
@@ -47,7 +47,7 @@ import bogdrosoft.meqaris.ui.web.spring.db.MeqCalDavServers;
  * @author Bogdan Drozdowski
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class CalDavServersControllerRestTest extends BaseIntegrationTest {
+public class CalDavServersControllerRestTest extends IntegrationTestBase {
 
 	@LocalServerPort
 	private int port;

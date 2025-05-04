@@ -28,7 +28,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
  * The base class for tests which need a temporary test database.
  * @author Bogdan Drozdowski
  */
-public class BaseIntegrationTest
+public class IntegrationTestBase
 {
 	protected static final PostgreSQLContainer<TestDatabase> POSTGRES;
 
