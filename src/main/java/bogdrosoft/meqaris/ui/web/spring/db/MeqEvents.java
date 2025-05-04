@@ -74,14 +74,6 @@ public class MeqEvents {
 	@Column(name = "e_data", insertable = false, updatable = false)
 	private String data;
 
-	private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = new ThreadLocal<SimpleDateFormat>() {
-
-		@Override
-		protected SimpleDateFormat initialValue() {
-			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-		}
-	};
-
 	public Long getId() {
 		return id;
 	}
@@ -216,7 +208,8 @@ public class MeqEvents {
 
 		Calendar c = Calendar.getInstance();
 		try {
-			c.setTime(DATE_FORMAT.get().parse(String.valueOf(date)));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+			c.setTime(sdf.parse(String.valueOf(date)));
 		} catch (ParseException e) {
 			c.setTimeInMillis(0);
 		}
