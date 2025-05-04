@@ -127,7 +127,7 @@ public class ChoiceController {
 			@ModelAttribute(name = IndexController.MODEL_ATTR_CHOOSER) @Valid Chooser c,
 			BindingResult res,	// NOTE: this MUST be the next parameter after the Chooser!
 			Model model
-		) throws Exception {
+	) throws IOException {
 
 		model.addAttribute(IndexController.MODEL_ATTR_CHOOSER, c);
 		if (res.hasErrors()) {
