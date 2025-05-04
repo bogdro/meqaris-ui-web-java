@@ -22,6 +22,7 @@
 
 package bogdrosoft.meqaris.ui.web.spring.rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class ConfigControllerRest {
 			String fileName,
 			@RequestParam(name = "name", required = false)
 			String name
-			) throws Exception {
+	) throws IOException {
 
 		List<MeqConfig> res = new ArrayList<>();
 		DbManager db = new DbManager(fileName);

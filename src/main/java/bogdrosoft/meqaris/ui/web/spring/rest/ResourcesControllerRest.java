@@ -22,6 +22,7 @@
 
 package bogdrosoft.meqaris.ui.web.spring.rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class ResourcesControllerRest {
 	public List<MeqResources> getResources(
 			@RequestParam(name = "file", required = false, defaultValue = Chooser.DEF_CFG_FILE_NAME)
 			String fileName
-			) throws Exception {
+	) throws IOException {
 
 		List<MeqResources> res = new ArrayList<>();
 		DbManager db = new DbManager(fileName);
@@ -74,7 +75,7 @@ public class ResourcesControllerRest {
 			String fileName,
 			@PathVariable(name = "id", required = true)
 			String id
-			) throws Exception {
+	) throws IOException {
 
 		DbManager db = new DbManager(fileName);
 		List<Map<String, Object>> rsrc = db.getResourceById(Long.valueOf(id));
