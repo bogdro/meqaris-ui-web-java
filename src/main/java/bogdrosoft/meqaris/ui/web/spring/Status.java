@@ -35,6 +35,8 @@ import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
  */
 public class Status {
 
+	private static final String DATA_ERROR_MSG = "Configuration data: file '";
+
 	private String cfgFileMsg;
 	private String cfgMsg;
 	private String log4PerlFileMsg;
@@ -156,7 +158,6 @@ public class Status {
 		s.setLockDirMsg("Lock file directory: Not checked");
 		s.setDbConnMsg("Database connection: Not checked");
 
-		String dataErrMsg = "Configuration data: file '";
 		if (filePath == null) {
 
 			s.setCfgFileMsg("Main configuration file: file path not provided.");
@@ -165,7 +166,7 @@ public class Status {
 		}
 
 		File mainCfg = new File(filePath);
-		if (! mainCfg.exists() || ! mainCfg.canRead() || ! mainCfg.isFile()) {
+		if (isFileUnusable(mainCfg)) {
 
 			s.setCfgFileMsg("Main configuration file: '"
 					+ filePath + "' doesn't exist, is not a file or cannot be read.");
@@ -186,65 +187,53 @@ public class Status {
 			return s;
 		}
 
-		Section meqarisSection;
-		try {
-			meqarisSection = ini.get("meqaris");
-		} catch (Exception e) {
-
-			s.setCfgMsg(dataErrMsg
-					+ filePath + "' has invalid format: section 'meqaris' is missing.");
-			s.setCfgStatus(Boolean.FALSE);
-			return s;
-		}
-
+		Section meqarisSection = getSection(ini, "meqaris");
 		if (meqarisSection == null) {
 
-			s.setCfgMsg(dataErrMsg
+			s.setCfgMsg(DATA_ERROR_MSG
 					+ filePath + "' has invalid format: section 'meqaris' is missing.");
 			s.setCfgStatus(Boolean.FALSE);
 			return s;
 		}
 
-		String[] mainSettings = new String[]
-				{"dbtype", "datadir", "log4perl_config_location", "lock_dir"};
-		for (String ms : mainSettings) {
+		String missingMainSetting = checkMissingSetting(
+			meqarisSection,
+			new String[] {"dbtype", "datadir", "log4perl_config_location", "lock_dir"}
+		);
+		if (missingMainSetting != null) {
 
-			if (! meqarisSection.containsKey(ms)) {
-
-				s.setCfgMsg("Configuration data: "
-						+ " section 'meqaris' is missing the setting '" + ms + "'.");
-				s.setCfgStatus(Boolean.FALSE);
-				return s;
-			}
+			s.setCfgMsg("Configuration data: "
+					+ " section 'meqaris' is missing the setting '" + missingMainSetting + "'.");
+			s.setCfgStatus(Boolean.FALSE);
+			return s;
 		}
 
-		Ini.Section dbSection = ini.get(meqarisSection.get("dbtype"));
+		Section dbSection = getSection(ini, meqarisSection.get("dbtype"));
 		if (dbSection == null) {
 
-			s.setCfgMsg(dataErrMsg
+			s.setCfgMsg(DATA_ERROR_MSG
 					+ filePath + "' has invalid format: the database section is missing.");
 			s.setCfgStatus(Boolean.FALSE);
 			return s;
 		}
 
-		String[] dbSettings = new String[]
-				{"username", "password", "dbname", "host", "port", "connect_timeout"};
-		for (String ds : dbSettings) {
+		String missingDbSetting = checkMissingSetting(
+			dbSection,
+			new String[] {"username", "password", "dbname", "host", "port", "connect_timeout"}
+		);
+		if (missingDbSetting != null) {
 
-			if (! dbSection.containsKey(ds)) {
-
-				s.setCfgMsg("Configuration data: "
-						+ " database section is missing the setting '" + ds + "'.");
-				s.setCfgStatus(Boolean.FALSE);
-				return s;
-			}
+			s.setCfgMsg("Configuration data: "
+					+ " database section is missing the setting '" + missingDbSetting + "'.");
+			s.setCfgStatus(Boolean.FALSE);
+			return s;
 		}
 		s.setCfgMsg("Configuration data: OK");
 		s.setCfgStatus(Boolean.TRUE);
 
 		String l4pPath = meqarisSection.get("log4perl_config_location");
 		File log4perlCfg = new File(l4pPath);
-		if (! log4perlCfg.exists() || ! log4perlCfg.canRead() || ! log4perlCfg.isFile()) {
+		if (isFileUnusable(log4perlCfg)) {
 
 			s.setLog4PerlFileMsg("Log4perl configuration file: file '"
 					+ l4pPath + "' doesn't exist, is not a file or cannot be read.");
@@ -256,7 +245,7 @@ public class Status {
 
 		String sqlPath = meqarisSection.get("datadir") + "/sql";
 		File sqlDir = new File(sqlPath);
-		if (! sqlDir.exists() || ! sqlDir.isDirectory()) {
+		if (isDirectoryUnusable(sqlDir)) {
 
 			s.setSqlDirMsg("SQL directory: '"
 					+ sqlPath + "' doesn't exist or is not a directory.");
@@ -268,7 +257,7 @@ public class Status {
 
 		String lockPath = meqarisSection.get("lock_dir");
 		File lockDir = new File(lockPath);
-		if (! lockDir.exists() || ! lockDir.isDirectory()) {
+		if (isDirectoryUnusable(lockDir)) {
 
 			s.setLockDirMsg("Lock file directory: '"
 					+ lockPath + "' doesn't exist or is not a directory.");
@@ -293,5 +282,36 @@ public class Status {
 		s.setDbConnStatus(Boolean.TRUE);
 
 		return s;
+	}
+
+	private static Section getSection(Ini ini, String sectionName) {
+
+		Section ret;
+		try {
+			ret = ini.get(sectionName);
+		} catch (Exception e) {
+			return null;
+		}
+		return ret;
+	}
+
+	private static String checkMissingSetting(Section section, String[] settings) {
+
+		for (String s : settings) {
+			if (! section.containsKey(s)) {
+				return s;
+			}
+		}
+		return null;
+	}
+
+	private static boolean isFileUnusable(File f) {
+
+		return !f.exists() || !f.canRead() || !f.isFile();
+	}
+
+	private static boolean isDirectoryUnusable(File d) {
+
+		return !d.exists() || !d.isDirectory();
 	}
 }

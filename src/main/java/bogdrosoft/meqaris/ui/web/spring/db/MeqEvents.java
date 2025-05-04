@@ -74,6 +74,14 @@ public class MeqEvents {
 	@Column(name = "e_data", insertable = false, updatable = false)
 	private String data;
 
+	private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = new ThreadLocal<SimpleDateFormat>() {
+
+		@Override
+		protected SimpleDateFormat initialValue() {
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+		}
+	};
+
 	public Long getId() {
 		return id;
 	}
@@ -166,53 +174,52 @@ public class MeqEvents {
 
 	public static MeqEvents buildFromMap(Map<String, Object> m) {
 		MeqEvents ev = new MeqEvents();
-		if (m != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-			Object id = m.get("e_id");
-			if (id != null) {
-				ev.setId(Long.valueOf(String.valueOf(id)));
-			}
-			Object entryDate = m.get("e_entry_date");
-			if (entryDate != null) {
-				Calendar c = Calendar.getInstance();
-				try {
-					c.setTime(sdf.parse(String.valueOf(entryDate)));
-				} catch (ParseException e) {
-					c.setTimeInMillis(0);
-				}
-				ev.setEntryDate(c);
-			}
-			Object organiser = m.get("e_organiser");
-			if (organiser != null) {
-				ev.setOrganiser(String.valueOf(organiser));
-			}
-			Object summary = m.get("e_summary");
-			if (summary != null) {
-				ev.setSummary(String.valueOf(summary));
-			}
-			Object dtstamp = m.get("e_dtstamp");
-			if (dtstamp != null) {
-				Calendar c = Calendar.getInstance();
-				try {
-					c.setTime(sdf.parse(String.valueOf(dtstamp)));
-				} catch (ParseException e) {
-					c.setTimeInMillis(0);
-				}
-				ev.setDateTimestamp(c);
-			}
-			Object uid = m.get("e_uid");
-			if (uid != null) {
-				ev.setUid(String.valueOf(uid));
-			}
-			Object seq = m.get("e_seq");
-			if (seq != null) {
-				ev.setSeq(Integer.valueOf(String.valueOf(seq)));
-			}
-			Object data = m.get("e_data");
-			if (data != null) {
-				ev.setData(String.valueOf(data));
-			}
+		if (m == null) {
+			return ev;
+		}
+		Object id = m.get("e_id");
+		if (id != null) {
+			ev.setId(Long.valueOf(String.valueOf(id)));
+		}
+		Object entryDate = m.get("e_entry_date");
+		if (entryDate != null) {
+			ev.setEntryDate(parseDate(entryDate));
+		}
+		Object organiser = m.get("e_organiser");
+		if (organiser != null) {
+			ev.setOrganiser(String.valueOf(organiser));
+		}
+		Object summary = m.get("e_summary");
+		if (summary != null) {
+			ev.setSummary(String.valueOf(summary));
+		}
+		Object dtstamp = m.get("e_dtstamp");
+		if (dtstamp != null) {
+			ev.setDateTimestamp(parseDate(dtstamp));
+		}
+		Object uid = m.get("e_uid");
+		if (uid != null) {
+			ev.setUid(String.valueOf(uid));
+		}
+		Object seq = m.get("e_seq");
+		if (seq != null) {
+			ev.setSeq(Integer.valueOf(String.valueOf(seq)));
+		}
+		Object data = m.get("e_data");
+		if (data != null) {
+			ev.setData(String.valueOf(data));
 		}
 		return ev;
+	}
+
+	private static Calendar parseDate(Object date) {
+
+		Calendar c = Calendar.getInstance();
+		try {
+			c.setTime(DATE_FORMAT.get().parse(String.valueOf(date)));
+		} catch (ParseException e) {
+			c.setTimeInMillis(0);
+		}
+		return c;
 	}
 }

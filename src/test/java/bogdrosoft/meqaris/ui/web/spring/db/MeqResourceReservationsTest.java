@@ -141,7 +141,7 @@ public class MeqResourceReservationsTest {
 	}
 
 	@Test
-	public void testEqualsDiffInterval() throws Exception {
+	public void testEqualsDiffInterval() {
 
 		Map<String, Object> input = prepareInput();
 		MeqResourceReservations c1 = MeqResourceReservations.buildFromMap(input);

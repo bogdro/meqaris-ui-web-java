@@ -23,10 +23,12 @@
 package bogdrosoft.meqaris.ui.web.spring.db;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.ini4j.Ini;
+import org.ini4j.Profile.Section;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -38,7 +40,7 @@ public class DbManager {
 
 	private JdbcTemplate jdbc;
 
-	public DbManager(String fileName) throws Exception {
+	public DbManager(String fileName) throws IOException {
 
 		if (fileName == null) {
 
@@ -58,7 +60,7 @@ public class DbManager {
 			throw new IllegalArgumentException("Database type '"
 					+ dbType + "' is not PostgreSQL");
 		}
-		Ini.Section dbSection = ini.get(dbType);
+		Section dbSection = ini.get(dbType);
 
 		PGSimpleDataSource ds = new PGSimpleDataSource();
 		ds.setUser(dbSection.get("username"));
