@@ -22,6 +22,8 @@
 
 package bogdrosoft.meqaris.ui.web.spring.rest;
 
+import java.io.IOException;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +42,7 @@ public class StatusControllerRest {
 	public Status getConfig(
 			@RequestParam(name = "file", required = false, defaultValue = Chooser.DEF_CFG_FILE_NAME)
 			String fileName
-			) {
+	) throws IOException {
 
 		return Status.checkStatus(fileName);
 	}

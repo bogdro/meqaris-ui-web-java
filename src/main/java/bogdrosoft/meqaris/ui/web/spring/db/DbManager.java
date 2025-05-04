@@ -47,7 +47,7 @@ public class DbManager {
 			throw new IllegalArgumentException("Configuration file name not provided.");
 		}
 
-		File cfgFile = new File(fileName);
+		File cfgFile = new File(fileName).getCanonicalFile();
 		if (! cfgFile.exists() || ! cfgFile.canRead()) {
 
 			throw new IllegalArgumentException("Cannot read '" + fileName + "'");

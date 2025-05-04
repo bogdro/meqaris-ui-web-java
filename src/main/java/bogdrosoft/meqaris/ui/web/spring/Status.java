@@ -23,6 +23,7 @@
 package bogdrosoft.meqaris.ui.web.spring;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
@@ -147,7 +148,7 @@ public class Status {
 		this.dbConnStatus = dbConnStatus;
 	}
 
-	public static Status checkStatus(String filePath) {
+	public static Status checkStatus(String filePath) throws IOException {
 
 		Status s = new Status();
 
@@ -164,6 +165,7 @@ public class Status {
 			s.setCfgFileStatus(Boolean.FALSE);
 			return s;
 		}
+		filePath = new File(filePath).getCanonicalPath();
 
 		File mainCfg = new File(filePath);
 		if (isFileUnusable(mainCfg)) {
