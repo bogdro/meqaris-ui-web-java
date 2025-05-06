@@ -26,8 +26,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import bogdrosoft.meqaris.ui.web.spring.Status;
 import bogdrosoft.meqaris.ui.web.spring.db.DbManager;
+import jakarta.validation.Valid;
 
 /**
  * The Spring controller for the /choose page.

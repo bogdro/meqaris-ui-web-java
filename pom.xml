@@ -30,7 +30,7 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
+		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -69,7 +69,7 @@ Meqaris homepage: https://meqaris.sourceforge.io/
 	</issueManagement>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<test.rsrc.dir>${project.build.testOutputDirectory}</test.rsrc.dir>
 		<!-- Version numbers: -->
 		<ini4j.version>0.5.4</ini4j.version>
