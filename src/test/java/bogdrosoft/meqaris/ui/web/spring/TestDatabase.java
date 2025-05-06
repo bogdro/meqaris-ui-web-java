@@ -62,7 +62,7 @@ public class TestDatabase extends PostgreSQLContainer<TestDatabase>
 				.withDatabaseName("meqaris-test")
 				.withInitScripts(
 					"sql/meqaris-full.pgsql",
-					"sql/data.sql"
+					"sql/data.pgsql"
 				);
 			instance.setPortBindings(PORT_BINDINGS);
 		}
