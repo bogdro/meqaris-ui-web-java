@@ -1,3 +1,34 @@
+2025-05-06	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
+
+	* Meqaris-UI-web-java version 1.3:
+	  Updated Spring Boot version and adapted code (Java version 17+ now
+	  required). Some safety code changes. Great improvements in tests -
+	  add using test containers (see https://testcontainers.com/) for
+	  testing and enabled coverage (current coverage: src/main: 99.5%,
+	  src/test: 99.3%, total: 99.4%). Other small code updates.
+	  Improvements in the build system. Improvements in the documentation.
+	* Status.java, DbManager.java, MeqResourceReservationsTest.java,
+	  MeqEvents.java: Moved common code to methods and simplified.
+	* Status.java, DbManager.java, StatusControllerRest.java,
+	  StatusTest.java: Canonicalise paths.
+	* pom.xml, src/**/*.java: Updated Spring Boot to v3.4.5 and adapted
+	  the code.
+	* src/main/**/rest/*.java, ChoiceController.java: Use more specific
+	  exceptions.
+	* src/**/*.java: Added class comments.
+	* IntegrationTestBase.java, TestDatabase.java, src/test/**/rest/*.java,
+	  ChoiceControllerTest.java, pom.xml, test/resources/good.ini,
+	  test/resources/sql/meqaris-full.pgsql, test/resources/sql/data.pgsql:
+	  Start using a test container database (https://testcontainers.com/)
+	  for integration tests.
+	* ConfigControllerRestTest.java: Simplified test conditions.
+	* src/test/**/*.java: Removed unnecessary code.
+	* pom.xml: Moved version numbers to properties. Added more description
+	  tags. Added a profile to build a coverage report.
+	* Makefile: Added a target to build coverage.
+	* README.md: Updated to match README and other projects.
+	* src/**/*, Makefile, pom.xml: Updated copyright.
+
 2023-05-17	Bogdan Drozdowski <bogdro /AT/ users . sourceforge . net>
 
 	* Meqaris-UI-web-java version 1.2:
